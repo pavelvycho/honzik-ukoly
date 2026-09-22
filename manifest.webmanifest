@@ -1,0 +1,19 @@
+{
+  "name": "Honzíkovy úkoly",
+  "short_name": "Úkoly",
+  "description": "Devět úkolů pro předškoláka na myšlení, pozornost a uvolnění ruky.",
+  "lang": "cs",
+  "dir": "ltr",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#FBF7EF",
+  "theme_color": "#FBF7EF",
+  "icons": [
+    { "src": "ikona-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "ikona-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "ikona-maskable-512.png", "sizes": "512x512", "type": "image/png",
+      "purpose": "maskable" }
+  ]
+}
