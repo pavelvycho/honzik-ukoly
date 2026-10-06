@@ -380,6 +380,169 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 .pole.ok{border-color:var(--zelena);background:color-mix(in srgb,var(--zelena) 14%,transparent)}
 .pole.ne{animation:klepani .4s ease}
 
+/* ---------- oddíly na domovské obrazovce ---------- */
+.sekce{padding:10px 2px 0}
+.sekce b{display:block;font-size:15px;font-weight:700;margin-bottom:2px}
+.sekce span{font-size:12.5px;color:var(--ink2);line-height:1.45}
+.dlazdice.ctyri{grid-template-columns:repeat(2,1fr)}
+@media (min-width:620px){.dlazdice.ctyri{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:619px){.dlazdice.ctyri > :last-child{grid-column:auto}}
+
+/* ---------- počítadlo nad hrou ---------- */
+.pocitadlo{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--karta);border:2.5px solid var(--ink);border-radius:999px;
+  box-shadow:0 4px 0 var(--stin);padding:7px 18px;
+  flex:0 0 auto;align-self:center;
+  font-size:14px;font-weight:600;color:var(--ink2);
+}
+.pocitadlo .cis{font-size:21px;font-weight:700;color:var(--ink);
+                font-variant-numeric:tabular-nums}
+.pocitadlo svg{width:36px;height:36px;flex:0 0 auto}
+.stitek{text-align:center;font-size:clamp(14px,1.9vw,17px);font-weight:600;
+        color:var(--ink2);min-height:1.4em}
+
+/* ---------- Najdi všechny ---------- */
+.lovna{display:grid;gap:8px;width:100%;max-width:620px;margin:0 auto}
+.lovna button{
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  background:var(--karta);border:2.5px solid var(--linka);border-radius:14px;
+  transition:transform .12s ease,border-color .12s ease,background .2s ease;
+}
+.lovna button svg{width:76%;height:auto}
+.lovna button:active{transform:scale(.93)}
+.lovna button.nalez{border-color:var(--zelena);
+  background:color-mix(in srgb,var(--zelena) 17%,var(--karta))}
+.lovna button.ne{border-color:var(--cervena);animation:klepani .4s ease}
+
+/* ---------- Počkej si ---------- */
+.jeviste{
+  flex:0 0 auto;height:clamp(230px,44vh,420px);
+  display:flex;align-items:center;justify-content:center;
+  background:var(--karta);border:3px dashed var(--linka);border-radius:26px;
+  transition:border-color .1s ease,background .1s ease;
+}
+.jeviste.plno{border-style:solid;border-color:var(--ink);box-shadow:0 5px 0 var(--stin)}
+.jeviste svg{width:clamp(130px,30vw,260px);height:auto}
+.jeviste.ok{border-color:var(--zelena);
+  background:color-mix(in srgb,var(--zelena) 14%,var(--karta))}
+.jeviste.ne{border-color:var(--cervena);
+  background:color-mix(in srgb,var(--cervena) 12%,var(--karta))}
+
+/* ---------- Pamatuj si pořadí ---------- */
+.ctyrka{display:grid;grid-template-columns:1fr 1fr;gap:14px;
+        max-width:440px;margin:0 auto;width:100%}
+.ctyrka button{
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  border:3px solid var(--ink);border-radius:22px;background:var(--karta);
+  box-shadow:0 5px 0 var(--stin);
+  transition:transform .12s ease,background .12s ease;
+}
+.ctyrka button svg{width:54%;height:auto}
+.ctyrka button.sviti{transform:scale(1.07)}
+.ctyrka.ceka button{pointer-events:none}
+.ctyrka button.ne{animation:klepani .4s ease;border-color:var(--cervena)}
+
+/* ---------- Co se změnilo ---------- */
+.pamet-mrizka{display:grid;gap:10px;width:100%;max-width:540px;margin:0 auto}
+.pamet-mrizka > *{
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  background:var(--karta);border:2.5px solid var(--linka);border-radius:16px;
+  transition:border-color .12s ease,background .2s ease;
+}
+.pamet-mrizka > * svg{width:68%;height:auto}
+.pamet-mrizka > *.ok{border-color:var(--zelena);
+  background:color-mix(in srgb,var(--zelena) 17%,var(--karta))}
+.pamet-mrizka > *.ne{border-color:var(--cervena);animation:klepani .4s ease}
+.odpocet{
+  height:10px;border:2px solid var(--ink);border-radius:999px;overflow:hidden;
+  background:var(--karta);max-width:540px;margin:0 auto;width:100%;flex:0 0 auto;
+}
+.odpocet i{display:block;height:100%;background:var(--modra);width:100%}
+
+/* ---------- verbální hry ---------- */
+/* velké tlačítko s obrázkem, na které se dá klepnout, aby slovo znovu zaznělo */
+.slovo{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  background:var(--karta);border:3px solid var(--ink);border-radius:24px;
+  box-shadow:0 5px 0 var(--stin);padding:16px 22px;align-self:center;
+}
+.slovo svg{width:clamp(76px,16vw,130px);height:auto}
+.slovo .jm{font-weight:700;font-size:clamp(17px,2.6vw,23px)}
+.slovo .znovu{font-size:11px;font-weight:600;letter-spacing:.08em;
+              text-transform:uppercase;color:var(--ink2)}
+.volba .pismeno{font-size:clamp(40px,8vw,64px);font-weight:700;line-height:1}
+.volba .tlesk{display:flex;gap:9px;align-items:center}
+.volba .tlesk i{width:clamp(15px,2.6vw,22px);height:clamp(15px,2.6vw,22px);
+  border-radius:50%;background:var(--ink);display:block}
+
+/* scéna pro porozumění větě: dva obrázky v rámečku, vzájemná poloha je ta úloha */
+.scenka{position:relative;width:100%;aspect-ratio:1.25}
+.scenka svg{position:absolute;width:38%;height:auto}
+
+/* ---------- matice ---------- */
+.matice{display:grid;gap:10px;margin:0 auto;width:100%;max-width:420px}
+.matice > *{
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  background:var(--karta);border:2.5px solid var(--linka);border-radius:16px;
+}
+.matice > * svg{width:70%;height:auto}
+.matice > *.dira{border:3px dashed var(--ink);
+  background:color-mix(in srgb,var(--zluta) 13%,var(--karta))}
+
+/* ---------- sudoku ---------- */
+.sudoku{display:grid;gap:5px;margin:0 auto;width:100%;max-width:400px;
+  border:3px solid var(--ink);border-radius:18px;padding:5px;
+  background:var(--ink);box-shadow:0 5px 0 var(--stin)}
+.sudoku button{
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  background:var(--karta);border:none;border-radius:11px;
+  transition:transform .12s ease,background .15s ease;
+}
+.sudoku button svg{width:72%;height:auto}
+.sudoku button.dano{background:color-mix(in srgb,var(--ink) 9%,var(--karta))}
+.sudoku button.ted{background:color-mix(in srgb,var(--zluta) 30%,var(--karta))}
+.sudoku button.ne{animation:klepani .4s ease;
+  background:color-mix(in srgb,var(--cervena) 24%,var(--karta))}
+.sudoku button:active{transform:scale(.94)}
+.paleta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.paleta button{
+  width:clamp(58px,12vw,86px);aspect-ratio:1;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--karta);border:3px solid var(--ink);border-radius:18px;
+  box-shadow:0 4px 0 var(--stin);transition:transform .12s ease;
+}
+.paleta button svg{width:66%;height:auto}
+/* vybraný tvar: žluté podbarvení jako v mřížce, ne inverze — na tmavém
+   podkladu byly obrysové tvary špatně vidět */
+.paleta button[aria-pressed="true"]{
+  background:color-mix(in srgb,var(--zluta) 32%,var(--karta));
+  box-shadow:0 4px 0 var(--stin),inset 0 0 0 4px var(--ink);
+}
+.paleta button:active{transform:translateY(4px)}
+
+/* ---------- výsledek zkoušky po oblastech ---------- */
+.oblasti-vysledek{display:flex;flex-direction:column;gap:12px;width:100%;
+                  max-width:430px;margin:0 auto}
+.oblasti-vysledek .r{display:grid;grid-template-columns:1fr 46%;
+  align-items:center;gap:12px;text-align:left}
+.oblasti-vysledek .n{font-size:14px;font-weight:600}
+.oblasti-vysledek .pr{display:flex;align-items:center;gap:9px}
+.oblasti-vysledek .mini{flex:1;height:12px;border-radius:999px;
+  background:var(--linka);overflow:hidden}
+.oblasti-vysledek .mini i{display:block;height:100%;border-radius:999px}
+.oblasti-vysledek .h{font-size:14px;font-weight:700;min-width:46px;
+  text-align:right;font-variant-numeric:tabular-nums}
+
+/* přepínač v přehledu pro rodiče – stejný tvar jako obtížnost v liště */
+.volic{
+  display:inline-flex;flex-wrap:wrap;margin-top:6px;
+  border:2.5px solid var(--ink);border-radius:999px;
+  box-shadow:0 3px 0 var(--stin);overflow:hidden;
+}
+.volic button{padding:8px 16px;font-size:13px;font-weight:600;color:var(--ink2)}
+.volic button[aria-pressed="true"]{background:var(--ink);color:var(--papir)}
+
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
@@ -419,6 +582,8 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 const IKONY = {"jablko": "<path d=\"M50 32 C36 24 22 32 22 50 C22 70 36 84 50 80 C64 84 78 70 78 50 C78 32 64 24 50 32 Z\"/> <path d=\"M50 32 L50 18\"/> <path d=\"M50 24 C56 16 68 14 72 14 C72 22 62 28 52 27\"/>", "hruska": "<path d=\"M50 28 C42 32 42 44 46 52 C36 58 32 70 38 78 C44 86 56 86 62 78 C68 70 64 58 54 52 C58 44 58 32 50 28 Z\"/> <path d=\"M50 28 L53 15\"/> <path d=\"M53 20 C60 14 70 14 72 13 C72 20 63 25 54 24\"/>", "banan": "<path d=\"M28 24 C28 54 48 76 78 78 L86 68 C58 64 40 48 40 26 Z\"/> <path d=\"M28 24 L26 12 L40 18 L40 26\"/> <path d=\"M78 78 L88 82 L86 68\"/>", "tresne": "<circle cx=\"34\" cy=\"72\" r=\"14\"/> <circle cx=\"66\" cy=\"74\" r=\"13\"/> <path d=\"M34 58 C38 40 46 26 58 18\"/> <path d=\"M66 61 C68 46 62 30 58 18\"/> <path d=\"M58 22 C66 14 78 14 82 16 C78 26 68 28 60 27\"/>", "hrozen": "<circle cx=\"50\" cy=\"38\" r=\"10\"/> <circle cx=\"38\" cy=\"54\" r=\"10\"/> <circle cx=\"62\" cy=\"54\" r=\"10\"/> <circle cx=\"28\" cy=\"70\" r=\"10\"/> <circle cx=\"50\" cy=\"70\" r=\"10\"/> <circle cx=\"72\" cy=\"70\" r=\"10\"/> <circle cx=\"40\" cy=\"84\" r=\"9\"/> <circle cx=\"60\" cy=\"84\" r=\"9\"/> <path d=\"M50 28 L50 16\"/> <path d=\"M50 20 C58 12 70 12 74 12 C72 20 62 25 52 24\"/>", "strom": "<path d=\"M50 10 C30 10 18 24 22 40 C10 50 16 68 32 68 L68 68 C84 68 90 50 78 40 C82 24 70 10 50 10 Z\"/> <path d=\"M42 68 L42 90 L58 90 L58 68\"/> <path d=\"M42 78 L58 78\"/>", "jehlicnan": "<path d=\"M50 10 L30 42 L70 42 Z\"/> <path d=\"M50 30 L24 66 L76 66 Z\"/> <path d=\"M44 66 L44 88 L56 88 L56 66\"/>", "kvetina": "<circle cx=\"50\" cy=\"20\" r=\"11\"/> <circle cx=\"70\" cy=\"32\" r=\"11\"/> <circle cx=\"70\" cy=\"54\" r=\"11\"/> <circle cx=\"50\" cy=\"66\" r=\"11\"/> <circle cx=\"30\" cy=\"54\" r=\"11\"/> <circle cx=\"30\" cy=\"32\" r=\"11\"/> <circle cx=\"50\" cy=\"43\" r=\"10\"/> <path d=\"M50 77 L50 94\"/> <path d=\"M50 84 C62 78 72 82 74 84 C68 92 56 92 50 88\"/>", "list": "<path d=\"M50 88 C28 72 20 48 32 24 C56 28 76 48 70 72 C67 82 58 90 50 88 Z\"/> <path d=\"M50 88 C46 62 40 40 32 24\"/> <path d=\"M46 66 L62 58\"/> <path d=\"M41 50 L56 42\"/>", "slunce": "<circle cx=\"50\" cy=\"50\" r=\"21\"/> <path d=\"M50 20 L50 8\"/><path d=\"M50 80 L50 92\"/> <path d=\"M20 50 L8 50\"/><path d=\"M80 50 L92 50\"/> <path d=\"M29 29 L20 20\"/><path d=\"M71 71 L80 80\"/> <path d=\"M71 29 L80 20\"/><path d=\"M29 71 L20 80\"/>", "mrak": "<path d=\"M30 74 C17 74 13 58 25 52 C25 36 44 30 52 42 C60 30 79 35 79 50 C90 53 89 74 76 74 Z\"/>", "kapka": "<path d=\"M50 12 C50 12 76 44 76 60 C76 75 64 86 50 86 C36 86 24 75 24 60 C24 44 50 12 50 12 Z\"/>", "ryba": "<path d=\"M16 50 C28 32 56 30 74 50 C56 70 28 68 16 50 Z\"/> <path d=\"M74 50 L92 34 L92 66 Z\"/> <circle cx=\"32\" cy=\"45\" r=\"3.5\" fill=\"currentColor\" stroke=\"none\"/> <path d=\"M48 36 C52 44 52 56 48 64\"/>", "motyl": "<path d=\"M50 28 L50 76\"/> <path d=\"M50 28 L40 15\"/><path d=\"M50 28 L60 15\"/> <path d=\"M48 34 C36 18 14 22 17 40 C20 54 37 52 48 45 Z\"/> <path d=\"M52 34 C64 18 86 22 83 40 C80 54 63 52 52 45 Z\"/> <path d=\"M48 52 C36 48 19 54 24 68 C29 80 43 73 48 62 Z\"/> <path d=\"M52 52 C64 48 81 54 76 68 C71 80 57 73 52 62 Z\"/>", "beruska": "<circle cx=\"50\" cy=\"58\" r=\"28\"/> <circle cx=\"50\" cy=\"28\" r=\"12\"/> <path d=\"M50 30 L50 86\"/> <circle cx=\"36\" cy=\"48\" r=\"5\" fill=\"currentColor\" stroke=\"none\"/> <circle cx=\"64\" cy=\"48\" r=\"5\" fill=\"currentColor\" stroke=\"none\"/> <circle cx=\"36\" cy=\"68\" r=\"5\" fill=\"currentColor\" stroke=\"none\"/> <circle cx=\"64\" cy=\"68\" r=\"5\" fill=\"currentColor\" stroke=\"none\"/> <path d=\"M44 18 L38 8\"/><path d=\"M56 18 L62 8\"/>", "ptak": "<path d=\"M24 72 C24 56 38 48 54 48 C72 48 84 58 84 70 C84 80 76 87 66 87 L40 87 C30 87 24 80 24 72 Z\"/> <circle cx=\"64\" cy=\"35\" r=\"14\"/> <path d=\"M78 32 L95 37 L78 42 Z\"/> <path d=\"M42 65 C50 57 64 57 71 65 C64 74 50 74 42 65 Z\"/> <path d=\"M24 72 L5 64 L10 81 Z\"/> <circle cx=\"69\" cy=\"31\" r=\"3.2\" fill=\"currentColor\" stroke=\"none\"/>", "auto": "<path d=\"M10 66 L10 50 L22 50 L32 32 L62 32 L74 50 L90 50 L90 66 Z\"/> <circle cx=\"29\" cy=\"68\" r=\"10\"/> <circle cx=\"71\" cy=\"68\" r=\"10\"/> <path d=\"M38 50 L38 34\"/>", "lod": "<path d=\"M12 64 L88 64 L76 82 L24 82 Z\"/> <path d=\"M50 62 L50 12\"/> <path d=\"M54 18 L54 58 L80 58 Z\"/> <path d=\"M46 26 L46 58 L26 58 Z\"/>", "letadlo": "<path d=\"M50 10 C57 20 59 32 59 44 L88 62 L88 70 L59 61 L59 74 L68 82 L68 90 L50 85 L32 90 L32 82 L41 74 L41 61 L12 70 L12 62 L41 44 C41 32 43 20 50 10 Z\"/>", "dum": "<path d=\"M14 52 L50 20 L86 52\"/> <path d=\"M24 46 L24 86 L76 86 L76 46\"/> <path d=\"M42 86 L42 62 L58 62 L58 86\"/> <rect x=\"30\" y=\"52\" width=\"14\" height=\"14\"/>", "mic": "<circle cx=\"50\" cy=\"50\" r=\"32\"/> <path d=\"M26 28 C40 42 40 58 26 72\"/> <path d=\"M74 28 C60 42 60 58 74 72\"/>", "hrnek": "<path d=\"M24 32 L24 74 C24 81 29 86 36 86 L58 86 C65 86 70 81 70 74 L70 32 Z\"/> <path d=\"M70 44 C85 44 85 66 70 66\"/> <path d=\"M36 22 C40 16 36 12 38 6\"/> <path d=\"M52 22 C56 16 52 12 54 6\"/>", "destnik": "<path d=\"M10 52 C10 28 28 12 50 12 C72 12 90 28 90 52\"/> <path d=\"M10 52 C18 44 27 60 37 52 C46 45 54 60 63 52 C72 44 81 60 90 52\"/> <path d=\"M50 52 L50 78 C50 87 38 89 34 82\"/> <path d=\"M50 12 L50 4\"/>", "klic": "<circle cx=\"28\" cy=\"50\" r=\"17\"/> <circle cx=\"28\" cy=\"50\" r=\"7\"/> <path d=\"M45 50 L90 50\"/> <path d=\"M78 50 L78 64\"/> <path d=\"M66 50 L66 62\"/>", "balon": "<path d=\"M50 10 C66 10 77 25 77 41 C77 58 62 72 50 76 C38 72 23 58 23 41 C23 25 34 10 50 10 Z\"/> <path d=\"M44 76 L56 76 L50 84 Z\"/> <path d=\"M50 84 C58 89 42 92 50 97\"/>", "kruh": "<circle cx=\"50\" cy=\"50\" r=\"32\"/>", "ctverec": "<rect x=\"19\" y=\"19\" width=\"62\" height=\"62\" rx=\"4\"/>", "trojuhelnik": "<path d=\"M50 14 L88 82 L12 82 Z\"/>", "hvezda": "<path d=\"M50 10 L61 38 L91 39 L67 57 L76 86 L50 69 L24 86 L33 57 L9 39 L39 38 Z\"/>", "srdce": "<path d=\"M50 86 C18 64 12 44 23 31 C34 19 48 25 50 38 C52 25 66 19 77 31 C88 44 82 64 50 86 Z\"/>", "kosoctverec": "<path d=\"M50 12 L86 50 L50 88 L14 50 Z\"/>"};
 const NAZVY = {"jablko": "jablko", "hruska": "hruška", "banan": "banán", "tresne": "třešně", "hrozen": "hrozen", "strom": "strom", "jehlicnan": "smrk", "kvetina": "květina", "list": "list", "slunce": "slunce", "mrak": "mrak", "kapka": "kapka", "ryba": "ryba", "motyl": "motýl", "beruska": "beruška", "ptak": "pták", "auto": "auto", "lod": "loď", "letadlo": "letadlo", "dum": "dům", "mic": "míč", "hrnek": "hrnek", "destnik": "deštník", "klic": "klíč", "balon": "balón", "kruh": "kruh", "ctverec": "čtverec", "trojuhelnik": "trojúhelník", "hvezda": "hvězda", "srdce": "srdce", "kosoctverec": "kosočtverec"};
 const BARVY = {"jablko": "cervena", "hruska": "zelena", "banan": "zluta", "tresne": "cervena", "hrozen": "fialova", "strom": "zelena", "jehlicnan": "zelena", "kvetina": "ruzova", "list": "zelena", "slunce": "zluta", "mrak": "modra", "kapka": "tyrkys", "ryba": "modra", "motyl": "fialova", "beruska": "cervena", "ptak": "tyrkys", "auto": "modra", "lod": "cervena", "letadlo": "seda", "dum": "hneda", "mic": "oranzova", "hrnek": "hneda", "destnik": "fialova", "klic": "seda", "balon": "ruzova", "kruh": "modra", "ctverec": "cervena", "trojuhelnik": "zelena", "hvezda": "zluta", "srdce": "ruzova", "kosoctverec": "fialova"};
+const HLASKA = {"jablko": "J", "hruska": "H", "banan": "B", "tresne": "T", "hrozen": "H", "strom": "S", "jehlicnan": "S", "kvetina": "K", "list": "L", "slunce": "S", "mrak": "M", "kapka": "K", "ryba": "R", "motyl": "M", "beruska": "B", "ptak": "P", "auto": "A", "lod": "L", "letadlo": "L", "dum": "D", "mic": "M", "hrnek": "H", "destnik": "D", "klic": "K", "balon": "B", "kruh": "K", "hvezda": "H", "srdce": "S"};
+const SLABIKY = {"jablko": 2, "hruska": 2, "banan": 2, "tresne": 2, "hrozen": 2, "strom": 1, "jehlicnan": 1, "kvetina": 3, "list": 1, "slunce": 2, "mrak": 1, "kapka": 2, "ryba": 2, "motyl": 2, "beruska": 3, "ptak": 1, "auto": 2, "lod": 1, "letadlo": 3, "dum": 1, "mic": 1, "hrnek": 2, "destnik": 2, "klic": 1, "balon": 2, "kruh": 1, "hvezda": 2, "srdce": 2};
 
 /* ---------- drobné pomůcky ---------- */
 const $ = s => document.querySelector(s);
@@ -434,6 +599,13 @@ const michej = a => { a = a.slice();
     [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const vzorek = (a, n) => michej(a).slice(0, n);
 const cele = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+
+/* Hry se zpožděním (Počkej si, Pamatuj si pořadí, Co se změnilo) si plánují
+   budoucí kroky. Kdyby dítě uprostřed odešlo, musí se všechny zrušit —
+   jinak by jim pod rukama zmizela plocha, do které kreslí. */
+let casovace = [];
+const pozdeji = (fn, ms) => { const id = setTimeout(fn, ms); casovace.push(id); return id; };
+function zrusCasovace() { casovace.forEach(clearTimeout); casovace = []; }
 
 /* Každý obrázek má svou barvu; dá se přebít parametrem. */
 const barvaIkony = jm => `var(--b-${BARVY[jm] || "seda"})`;
@@ -525,12 +697,14 @@ function zapisUlohu(hraId, naPrvni, cas) {
   ulozVysledky();
 }
 
-/* Pexeso a kreslení nemají „úlohy na první pokus", zapisují rovnou podíl. */
-function zapisPodil(hraId, podil, uloh) {
+/* Pexeso, kreslení a hry na soustředění nemají „úlohy na první pokus",
+   zapisují rovnou podíl. */
+function zapisPodil(hraId, podil, uloh, cas) {
   const o = vysledky.oblasti[hraId] ||
     (vysledky.oblasti[hraId] = { uloh: 0, naPrvni: 0, casSuma: 0, casPocet: 0 });
   o.uloh += uloh;
-  o.naPrvni += Math.round(podil * uloh);
+  o.naPrvni += podil * uloh;
+  if (cas > 0 && cas < 600000) { o.casSuma += cas; o.casPocet++; }
   ulozVysledky();
 }
 
@@ -556,6 +730,21 @@ function nastavUroven(u) {
   try { localStorage.setItem("honzik-uroven", u); } catch (e) {}
   document.querySelectorAll("#uroven button").forEach(b =>
     b.setAttribute("aria-pressed", String(b.dataset.u === u)));
+}
+
+/* ---------- doba na prohlédnutí u „Co se změnilo" ----------
+   Nastavuje se v přehledu pro rodiče, ne v liště: je to věc, kterou se
+   trefuje jednou a pak se jí nehýbe, a hlavně do ní nemá co mluvit dítě.
+   Nula znamená „sám": obrázky se schovají, až na to klepne. */
+const DOBY = [5, 8, 12, 20, 0];
+let dobaPamatovani = 8;
+try {
+  const u = parseInt(localStorage.getItem("honzik-doba"), 10);
+  if (DOBY.includes(u)) dobaPamatovani = u;
+} catch (e) {}
+function nastavDobu(s) {
+  dobaPamatovani = s;
+  try { localStorage.setItem("honzik-doba", String(s)); } catch (e) {}
 }
 
 /* ---------- přidání na plochu ----------
@@ -633,7 +822,7 @@ function obnovLista() {
 /* Pořadí dlaždic jde od nejlehčího úkolu po nejtěžší. */
 const HRY = [
   {
-    id: "nepatri", jm: "Co sem nepatří", kat: "třídění", ikona: "jablko", barva: "cervena", listy: "7", kol: 8,
+    id: "nepatri", oblast: "logika", jm: "Co sem nepatří", kat: "třídění", ikona: "jablko", barva: "cervena", listy: "7", kol: 8,
     zadani: "Klepni na to, co sem nepatří.",
     uloha(k) {
       /* Snadná úroveň: dvě náhodné kategorie, vetřelec bije do očí.
@@ -651,11 +840,11 @@ const HRY = [
     }
   },
   {
-    id: "stopa", jm: "Kresli po stopě", kat: "uvolnění ruky", ikona: "kapka", barva: "tyrkys", listy: "1–5", kol: 4,
+    id: "stopa", oblast: "ruka", jm: "Kresli po stopě", kat: "uvolnění ruky", ikona: "kapka", barva: "tyrkys", listy: "1–5", kol: 4,
     zadani: "Veď prstem po šedé cestě od tečky až na konec.", vlastni: true
   },
   {
-    id: "vic", jm: "Čeho je víc", kat: "porovnávání", ikona: "hrozen", barva: "fialova", listy: "12", kol: 8,
+    id: "vic", oblast: "matematika", jm: "Čeho je víc", kat: "porovnávání", ikona: "hrozen", barva: "fialova", listy: "12", kol: 8,
     zadani: "Klepni na stranu, kde je víc obrázků.",
     uloha(k) {
       const rozdil = tezke() ? (k < 4 ? cele(2, 4) : 1) : cele(3, 5);
@@ -667,7 +856,7 @@ const HRY = [
     }
   },
   {
-    id: "pocitej", jm: "Spočítej", kat: "počet", ikona: "hvezda", barva: "zluta", listy: "11, 13 a 14", kol: 8,
+    id: "pocitej", oblast: "matematika", jm: "Spočítej", kat: "počet", ikona: "hvezda", barva: "zluta", listy: "11, 13 a 14", kol: 8,
     zadani: "Spočítej obrázky a klepni na správné číslo.",
     uloha(k) {
       const n = tezke()
@@ -685,7 +874,7 @@ const HRY = [
     }
   },
   {
-    id: "stejny", jm: "Najdi stejný", kat: "rozlišování", ikona: "ctverec", barva: "modra", listy: "8", kol: 8,
+    id: "stejny", oblast: "matematika", jm: "Najdi stejný", kat: "rozlišování", ikona: "ctverec", barva: "modra", listy: "8", kol: 8,
     zadani: "Který obrázek je úplně stejný jako ten nahoře?",
     uloha(k) {
       /* kulaté a souměrné obrázky sem nepatří – po otočení vypadají stejně */
@@ -707,7 +896,7 @@ const HRY = [
     }
   },
   {
-    id: "rozdil", jm: "Najdi rozdíl", kat: "zrak", ikona: "motyl", barva: "oranzova", listy: "6", kol: 6,
+    id: "rozdil", oblast: "matematika", jm: "Najdi rozdíl", kat: "zrak", ikona: "motyl", barva: "oranzova", listy: "6", kol: 6,
     zadani: "Mřížky jsou skoro stejné. Najdi, co je jinak.",
     uloha(k) {
       const poli = tezke() ? 9 : 6;
@@ -721,11 +910,11 @@ const HRY = [
     }
   },
   {
-    id: "pexeso", jm: "Pexeso", kat: "paměť", ikona: "mrak", barva: "zelena", listy: "", kol: 1,
+    id: "pexeso", oblast: "pamet", jm: "Pexeso", kat: "paměť", ikona: "mrak", barva: "zelena", listy: "", kol: 1,
     zadani: "Najdi dvojice stejných obrázků.", vlastni: true
   },
   {
-    id: "dvojice", jm: "Co k sobě patří", kat: "logika", ikona: "klic", barva: "ruzova", listy: "20", kol: 6,
+    id: "dvojice", oblast: "logika", jm: "Co k sobě patří", kat: "logika", ikona: "klic", barva: "ruzova", listy: "20", kol: 6,
     zadani: "Co k tomuhle obrázku patří?",
     uloha(k) {
       const [a, b] = DVOJICE[k % DVOJICE.length];
@@ -735,7 +924,7 @@ const HRY = [
     }
   },
   {
-    id: "rada", jm: "Co patří dál", kat: "posloupnost", ikona: "kosoctverec", barva: "hneda", listy: "9", kol: 8,
+    id: "rada", oblast: "logika", jm: "Co patří dál", kat: "posloupnost", ikona: "kosoctverec", barva: "hneda", listy: "9", kol: 8,
     zadani: "Obrázky se pravidelně střídají. Co patří do prázdného rámečku?",
     uloha(k) {
       /* Perioda vzoru musí dělit délku řady beze zbytku (6 = 2×3 = 3×2).
@@ -772,11 +961,133 @@ const HRY = [
   },
 ];
 
+/* ---------------------------------------------------------------------
+   Hry na soustředění — vlastní oddíl.
+   Nejsou součástí Velké cesty: ta má pevnou skladbu, aby se jednotlivé
+   běhy daly porovnávat, a kdybych do ní teď přidal čtyři hry, přestaly by
+   být srovnatelné se vším, co má Honzík za sebou. Mají proto svoje vlastní
+   krátké „Cvičení soustředění".
+   --------------------------------------------------------------------- */
+const HRY_POZOR = [
+  {
+    id: "najdi", oblast: "pozornost", jm: "Najdi všechny", kat: "vytrvalost", ikona: "tresne",
+    barva: "cervena", kol: 6, vlastni: true, pozor: true,
+    zadani: "Najdi v poli všechny stejné obrázky. Počítadlo ukazuje, kolik zbývá.",
+    listy: "3–6", sada: "soustredeni", casPopis: "na projití pole",
+    rada: "Na papíře sedí škrtací listy 3–6 ze sady na soustředění."
+  },
+  {
+    id: "pockej", oblast: "pozornost", jm: "Počkej si", kat: "brzda", ikona: "mic",
+    barva: "modra", kol: 6, vlastni: true, pozor: true,
+    zadani: "Klepni na obrázek z počítadla nahoře. Když přijde mrak, ruku nech být.",
+    rada: "Tohle se nedá cvičit na papíře. Doma na to jsou hry se signálem — " +
+          "„Cukr, káva, limonáda“, nebo chůze po pokoji, která se zastaví na tlesknutí."
+  },
+  {
+    id: "poradi", oblast: "pozornost", jm: "Pamatuj si pořadí", kat: "paměť a pozornost", ikona: "balon",
+    barva: "fialova", kol: 3, vlastni: true, pozor: true,
+    zadani: "Obrázky se rozsvítí jeden po druhém. Zopakuj to ve stejném pořadí.",
+    rada: "Beze všeho i bez tabletu: tři věci na stole, dítě si je prohlédne, " +
+          "zavře oči a vy je přerovnáte."
+  },
+  {
+    id: "zmena", oblast: "pozornost", jm: "Co se změnilo", kat: "zraková paměť", ikona: "ptak",
+    barva: "zelena", kol: 6, vlastni: true, pozor: true,
+    zadani: "Prohlédni si obrázky. Na chvilku zmizí a jeden se vymění.",
+    listy: "6", sada: "ukoly", casPopis: "na rozmyšlenou",
+    rada: "Blízko je list 6 (najdi rozdíl) z hlavní sady a doma hra " +
+          "„co jsem schoval“ — čtyři hračky, jednu vyměníte."
+  },
+];
+
+/* ---------------------------------------------------------------------
+   Na talentovky
+   Svět vzdělání u zkoušek sleduje tři věci: logické předpoklady (pravidla
+   a vztahy), matematické (počty, tvary, prostorová představivost) a verbální
+   (písmena, slabiky, porozumění větě). Logiku a matematiku pokrývají hry
+   výše; tyhle doplňují to, co v nich chybělo — pravidlo platné ve dvou
+   směrech zároveň, a hlavně celou řeč, kterou appka do téhle chvíle neuměla.
+
+   Verbální hry nevyžadují čtení: slovo i zadání se řeknou nahlas a odpovídá
+   se klepnutím. To je taky jediný způsob, jak se dá řeč zkoušet na tabletu
+   s předškolákem, který ještě nečte.
+   --------------------------------------------------------------------- */
+/* slova, u kterých známe první hlásku i počet slabik */
+const SLOVA = Object.keys(SLABIKY);
+
+const HRY_ZKOUSKA = [
+  {
+    id: "slabiky", oblast: "rec", jm: "Kolik slabik", kat: "slabiky",
+    ikona: "beruska", barva: "ruzova", kol: 8, vlastni: true, listy: "17",
+    zadani: "Vytleskej slovo a klepni na to, kolikrát jsi tleskl."
+  },
+  {
+    id: "hlaska", oblast: "rec", jm: "Na jakou hlásku", kat: "písmena",
+    ikona: "letadlo", barva: "seda", kol: 8, vlastni: true, listy: "15 a 16",
+    zadani: "Poslechni si slovo a klepni na písmeno, kterým začíná."
+  },
+  {
+    id: "veta", oblast: "rec", jm: "Poslouchej a ukaž", kat: "porozumění",
+    ikona: "hrnek", barva: "hneda", kol: 8, vlastni: true, listy: "21",
+    zadani: "Poslechni si větu a klepni na obrázek, který k ní sedí."
+  },
+  {
+    id: "matice", oblast: "logika", jm: "Doplň tabulku", kat: "pravidla",
+    ikona: "ctverec", barva: "fialova", kol: 8, listy: "9",
+    zadani: "V tabulce platí pravidlo po řádcích i po sloupcích. Co chybí?",
+    uloha(k) {
+      /* Dvě vlastnosti najednou: tvar určuje sloupec, barva řádek. Dítě musí
+         přijít na to, že se nestačí dívat jedním směrem — a přesně to ty
+         maticové úlohy u talentovek zkoušejí. */
+      const tvary = vzorek(KAT.tvary, tezke() ? 3 : 2);
+      const barvy = vzorek(["cervena", "modra", "zelena", "zluta", "fialova"],
+                           tezke() ? 3 : 2);
+      const S = tvary.length, R = barvy.length;
+      const bunky = [];
+      for (let r = 0; r < R; r++)
+        for (let c = 0; c < S; c++)
+          bunky.push({ jm: tvary[c], b: `var(--b-${barvy[r]})` });
+      const kde = cele(0, bunky.length - 1);
+      const spravne = bunky[kde];
+
+      /* Nabídka: správná a k ní záměny, které mají jedno políčko dobře
+         a druhé špatně — jinak by stačilo trefit se barvou. */
+      const moznosti = [spravne];
+      const jinyTvar = nah(tvary.filter(t => t !== spravne.jm));
+      const jinaBarva = nah(barvy.filter(b => `var(--b-${b})` !== spravne.b));
+      moznosti.push({ jm: jinyTvar, b: spravne.b });
+      moznosti.push({ jm: spravne.jm, b: `var(--b-${jinaBarva})` });
+      if (tezke()) moznosti.push({ jm: jinyTvar, b: `var(--b-${jinaBarva})` });
+      return { bunky, kde, sloupcu: S, moznosti: michej(moznosti),
+               spravne, typ: "matice" };
+    }
+  },
+  {
+    id: "sudoku", oblast: "logika", jm: "Sudoku", kat: "pravidla",
+    ikona: "trojuhelnik", barva: "tyrkys", kol: 5, vlastni: true, listy: "",
+    zadani: "V každém řádku a v každém sloupci smí být každý tvar jen jednou."
+  },
+];
+
+/* Pro přehled pro rodiče a pro hledání hry podle id. */
+const VSECHNY_HRY = HRY.concat(HRY_POZOR, HRY_ZKOUSKA);
+
+/* Jak se oblasti jmenují v přehledu a ve výsledku zkoušky. */
+const OBLASTI = {
+  logika: "Logické předpoklady",
+  matematika: "Matematické předpoklady",
+  rec: "Verbální předpoklady",
+  pozornost: "Soustředění a pozornost",
+  pamet: "Paměť",
+  ruka: "Uvolnění ruky",
+};
+
 /* =====================================================================
    Domovská obrazovka
    ===================================================================== */
 function domu() {
   stav = null;
+  zrusCasovace();
   $("#app").classList.add("domovska");
   $("#zpet").classList.remove("vid");
   $("#nadpis").textContent = "Honzíkovy úkoly";
@@ -785,7 +1096,7 @@ function domu() {
 
   const w = el("div", "wrap");
   const u = el("div", "uvod", `<h2>Co si dneska zkusíme?</h2>
-    <p>Devět úkolů na myšlení, pozornost a uvolnění ruky, seřazených
+    <p>Třináct úkolů na myšlení, pozornost a uvolnění ruky, seřazených
     od nejlehčího. Každý má pár kol a na konci hvězdičky.<br>
     Nahoře se přepíná obtížnost — začni na <b>snadné</b>.</p>`);
   w.appendChild(u);
@@ -810,16 +1121,59 @@ function domu() {
   cesta.appendChild(tlCesta);
   w.appendChild(cesta);
 
-  const g = el("div", "dlazdice");
-  HRY.forEach(h => {
-    const b = el("button", "hra-t");
-    b.style.setProperty("--tb", `var(--b-${h.barva})`);
-    b.innerHTML = svgIkona(h.ikona, 46, `var(--b-${h.barva})`) +
-      `<span class="jm">${h.jm}</span><span class="kat">${h.kat}</span>`;
-    b.onclick = () => spustHru(h);
-    g.appendChild(b);
-  });
-  w.appendChild(g);
+  const dlazdice = (hry, tridy) => {
+    const g = el("div", "dlazdice" + (tridy ? " " + tridy : ""));
+    hry.forEach(h => {
+      const b = el("button", "hra-t");
+      b.style.setProperty("--tb", `var(--b-${h.barva})`);
+      b.innerHTML = svgIkona(h.ikona, 46, `var(--b-${h.barva})`) +
+        `<span class="jm">${h.jm}</span><span class="kat">${h.kat}</span>`;
+      b.onclick = () => spustHru(h);
+      g.appendChild(b);
+    });
+    return g;
+  };
+
+  w.appendChild(el("div", "sekce",
+    "<b>Myšlení, zrak a ruka</b><span>Devět her z Velké cesty. " +
+    "Dají se hrát i jednotlivě.</span>"));
+  w.appendChild(dlazdice(HRY));
+
+  w.appendChild(el("div", "sekce",
+    "<b>Soustředění a pozornost</b><span>Krátké hry na vydržení u jedné věci, " +
+    "na zabrzdění ruky a na zrakovou paměť.</span>"));
+
+  const cv = el("div", "cesta-nabidka");
+  cv.style.background = "color-mix(in srgb, var(--modra) 12%, var(--karta))";
+  cv.innerHTML =
+    svgIkona("mic", 40, "var(--modra)") +
+    `<span class="txt"><b>Cvičení soustředění</b>` +
+    `<span>Všechny čtyři hry po jednom kole, tak na tři minuty. ` +
+    `Taky pevná skladba, takže je vidět posun.</span></span>`;
+  const tlCv = el("button", "tl hl", "Začít");
+  tlCv.onclick = spustSoustredeni;
+  cv.appendChild(tlCv);
+  w.appendChild(cv);
+
+  w.appendChild(dlazdice(HRY_POZOR, "ctyri"));
+
+  w.appendChild(el("div", "sekce",
+    "<b>Na talentovky</b><span>Tři oblasti, které se u zkoušek sledují: " +
+    "pravidla a vztahy, počty a tvary, a řeč.</span>"));
+
+  const zk = el("div", "cesta-nabidka");
+  zk.style.background = "color-mix(in srgb, var(--zelena) 12%, var(--karta))";
+  zk.innerHTML =
+    svgIkona("klic", 40, "var(--zelena)") +
+    `<span class="txt"><b>Zkouška nanečisto</b>` +
+    `<span>Patnáct úloh ze všech tří oblastí. Na konci je vidět ` +
+    `zvlášť logika, počty a řeč — tedy to, co zkouší škola.</span></span>`;
+  const tlZk = el("button", "tl hl", "Vyzkoušet");
+  tlZk.onclick = spustZkousku;
+  zk.appendChild(tlZk);
+  w.appendChild(zk);
+
+  w.appendChild(dlazdice(HRY_ZKOUSKA, "ctyri"));
   scena.appendChild(w);
 }
 
@@ -846,6 +1200,48 @@ function spustCestu() {
   spust("cesta", "Velká cesta", polozky);
 }
 
+/* Cvičení soustředění: od každé hry jedno kolo. Hry na soustředění trvají
+   samy o sobě dýl než jedno kolo „Spočítej", takže čtyři kola jsou tak na
+   tři minuty — krátké schválně, ať se dá dokončit i ve špatný den. */
+function spustSoustredeni() {
+  const polozky = michej(HRY_POZOR).map(h => ({ h, k: cele(0, h.kol - 1) }));
+  spust("soustredeni", "Cvičení soustředění", polozky);
+}
+
+/* Zkouška nanečisto: pět úloh z každé ze tří oblastí, které Svět vzdělání
+   u talentovek sleduje. Skladba je pevná, aby šly jednotlivé zkoušky
+   porovnávat; pořadí se míchá, ať to není pokaždé stejná jízda.
+   Sudoku tu schválně není — trvá řádově dýl než ostatní úlohy a jedna
+   dlouhá položka mezi patnácti krátkými by zkoušku rozhodila. */
+const ZKOUSKA_SKLADBA = [
+  ["nepatri", 1], ["rada", 1], ["dvojice", 1], ["matice", 2],
+  ["pocitej", 2], ["vic", 1], ["stejny", 1], ["rozdil", 1],
+  ["slabiky", 2], ["hlaska", 2], ["veta", 1],
+];
+const hraPodleId = id => VSECHNY_HRY.find(h => h.id === id);
+
+function spustZkousku() {
+  const polozky = [];
+  ZKOUSKA_SKLADBA.forEach(([id, kolik]) => {
+    const h = hraPodleId(id);
+    michej([...Array(h.kol).keys()]).slice(0, kolik)
+      .forEach(k => polozky.push({ h, k }));
+  });
+  spust("zkouska", "Zkouška nanečisto", michej(polozky));
+}
+
+/* Sečte výsledky běhu po oblastech (logika / matematika / řeč). */
+function podleOblasti(tally) {
+  const out = {};
+  for (const [id, t] of Object.entries(tally)) {
+    const h = hraPodleId(id);
+    if (!h || !t.uloh) continue;
+    const o = out[h.oblast] || (out[h.oblast] = { uloh: 0, naPrvni: 0 });
+    o.uloh += t.uloh; o.naPrvni += t.naPrvni;
+  }
+  return out;
+}
+
 function spust(rezim, nadpis, polozky) {
   stav = {
     rezim, nadpis, polozky, index: 0,
@@ -863,13 +1259,14 @@ function pridejVysledek(hraId, naPrvni, cas) {
   t.uloh++; if (naPrvni) t.naPrvni++;
   zapisUlohu(hraId, naPrvni, cas);
 }
-function pridejPodil(hraId, podil, uloh) {
+function pridejPodil(hraId, podil, uloh, cas) {
   const t = stav.tally[hraId] || (stav.tally[hraId] = { uloh: 0, naPrvni: 0 });
   t.uloh += uloh; t.naPrvni += podil * uloh;
-  zapisPodil(hraId, podil, uloh);
+  zapisPodil(hraId, podil, uloh, cas);
 }
 
 function dalsiPolozku() {
+  zrusCasovace();
   if (stav.index >= stav.polozky.length) return odmena();
   const { h, k } = stav.polozky[stav.index];
   stav.aktualni = h;
@@ -897,6 +1294,14 @@ function dalsiPolozku() {
   stav.zacatekUlohy = performance.now();
   if (h.id === "pexeso") return hraPexeso(p, k);
   if (h.id === "stopa") return hraStopa(p, k);
+  if (h.id === "najdi") return hraNajdi(p, k);
+  if (h.id === "pockej") return hraPockej(p, k);
+  if (h.id === "poradi") return hraPoradi(p, k);
+  if (h.id === "zmena") return hraZmena(p, k);
+  if (h.id === "slabiky") return hraSlabiky(p, k);
+  if (h.id === "hlaska") return hraHlaska(p, k);
+  if (h.id === "veta") return hraVeta(p, k);
+  if (h.id === "sudoku") return hraSudoku(p, k);
   stav.uloha = h.uloha(k);
   vykresliUlohu(p, stav.uloha);
 }
@@ -924,7 +1329,7 @@ function postupPruh() {
    zpět na výběr, běh se zahodí — jinak by se sahalo do neexistujícího stavu. */
 function poKole(ms) {
   const s = stav;
-  setTimeout(() => {
+  pozdeji(() => {
     if (!stav || stav !== s) return;
     stav.index++; dalsiPolozku();
   }, ms);
@@ -956,6 +1361,18 @@ function vykresliUlohu(p, u) {
       stroke-linecap="round"><rect x="10" y="10" width="80" height="80" rx="14"/></svg>`;
     u.rada.forEach((x, i) => { r.innerHTML += i === u.kde ? dira : svgIkona(x, 48); });
     p.appendChild(r);
+  } else if (u.typ === "matice") {
+    const m = el("div", "matice");
+    m.style.gridTemplateColumns = `repeat(${u.sloupcu},1fr)`;
+    u.bunky.forEach((x, i) => {
+      const c = el("div", i === u.kde ? "dira" : "");
+      if (i !== u.kde) c.innerHTML = svgIkona(x.jm, 54, x.b);
+      else c.innerHTML = `<svg viewBox="0 0 100 100" width="54" height="54"
+        fill="none" stroke="var(--ink)" stroke-width="7" stroke-linecap="round"
+        ><path d="M50 26 L50 74 M26 50 L74 50"/></svg>`;
+      m.appendChild(c);
+    });
+    p.appendChild(m);
   } else if (u.typ === "cislo") {
     const r = el("div", "ram");
     let s = "";
@@ -1021,6 +1438,7 @@ function vykresliUlohu(p, u) {
   u.moznosti.forEach(m => {
     const b = el("button", "volba");
     if (u.typ === "cislo") b.innerHTML = `<span class="cis">${m}</span>`;
+    else if (u.typ === "matice") b.innerHTML = svgIkona(m.jm, 58, m.b);
     else if (u.typ === "stejny") b.innerHTML = svgIkona(m.jm, 58, null, m.otoc);
     else b.innerHTML = svgIkona(m, 58);
     b.onclick = () => {
@@ -1226,10 +1644,610 @@ function hraStopa(p) {
 }
 
 /* =====================================================================
+   Najdi všechny
+   Škrtací úloha z papíru, jen s počítadlem. Pointa není v tom poznat
+   jablko — to umí hned — ale projít celé pole a neskončit v polovině.
+   Proto je pořád vidět, kolik zbývá: konec je na dohled.
+   ===================================================================== */
+function hraNajdi(p, k) {
+  const sloupcu = tezke() ? 5 : 4;
+  const poli = sloupcu * sloupcu;
+  const kolikCilu = tezke() ? 7 : 5;
+  const cil = ["jablko", "hvezda", "motyl", "kvetina", "tresne", "ryba"][k % 6];
+  /* jen čtyři druhy rušivých obrázků, ne celá knihovna — pole pak vypadá
+     jako pole, ne jako smetiště, a hledá se v něm o to líp */
+  const rusive = vzorek(VSE.filter(x => x !== cil), 4);
+
+  /* rušivé obrázky rozdělím rovnoměrně, ne náhodně: jinak se jeden z nich
+     objeví desetkrát, cíl pětkrát, a pole pak vypadá jako jeden druh
+     s několika výjimkami — hledá se v tom snadněji, než má */
+  const pole = [];
+  for (let i = 0; i < poli - kolikCilu; i++) pole.push(rusive[i % rusive.length]);
+  for (let i = 0; i < kolikCilu; i++) pole.push(cil);
+
+  let naslo = 0, chyby = 0;
+
+  const hlava = el("div", "pocitadlo");
+  hlava.innerHTML = "<span>najdi všechny</span>" + svgIkona(cil, 36);
+  const cis = el("span", "cis", `0 / ${kolikCilu}`);
+  hlava.appendChild(cis);
+  p.appendChild(hlava);
+
+  const g = el("div", "lovna");
+  g.style.gridTemplateColumns = `repeat(${sloupcu},1fr)`;
+  michej(pole).forEach(jm => {
+    const b = el("button");
+    b.innerHTML = svgIkona(jm, 44);
+    b.onclick = () => {
+      if (b.classList.contains("nalez")) return;
+      zaznamenejKlik();
+      if (jm !== cil) {
+        chyby++; zvukNe();
+        b.classList.add("ne");
+        pozdeji(() => b.classList.remove("ne"), 420);
+        return;
+      }
+      b.classList.add("nalez");
+      naslo++;
+      cis.textContent = `${naslo} / ${kolikCilu}`;
+      ton(560 + naslo * 45, .1);
+      if (naslo === kolikCilu) {
+        pridejPodil("najdi", Math.max(0, 1 - chyby / kolikCilu), 1,
+                    performance.now() - stav.zacatekUlohy);
+        zvukOk(); razitko(true);
+        poKole(640);
+      }
+    };
+    g.appendChild(b);
+  });
+  p.appendChild(g);
+}
+
+/* =====================================================================
+   Počkej si
+   Jediná hra v celé appce, kde se vyhrává tím, že člověk nic neudělá.
+   Cíl se mění po kolech, mrak je pořád stejný — pravidlo „na mrak ne"
+   se tak může zažít, místo aby se pokaždé učilo znovu.
+   ===================================================================== */
+function hraPockej(p, k) {
+  const cil = ["jablko", "hruska", "tresne", "kvetina", "motyl", "balon"][k % 6];
+  const kolik = tezke() ? 16 : 12;
+  const doba = tezke() ? 900 : 1250;      /* jak dlouho je obrázek vidět */
+  const pauza = tezke() ? 420 : 560;
+
+  /* Mraků je přesně třetina — ne „každý s pravděpodobností třetina". Při
+     náhodě by jednou vyšly dva a jindy šest, a protože se z počtu cílů
+     počítá úspěšnost, nebyla by jednotlivá kola srovnatelná.
+     První je vždycky cíl, ať je hned jasné, co se dělá, a nikdy nejsou
+     tři mraky za sebou — to už není brzda, to je čekání. */
+  const mraku = Math.round(kolik / 3);
+  const cilu = kolik - mraku;
+  let rada, pokus = 0;
+  do {
+    rada = michej(Array(cilu).fill(true).concat(Array(mraku).fill(false)));
+  } while (++pokus < 60 && (!rada[0] || rada.some((_, i) =>
+    i >= 2 && !rada[i] && !rada[i - 1] && !rada[i - 2])));
+  /* pojistka, kdyby se to za šedesát pokusů netrefilo: prohodit, ne přepsat,
+     aby počet cílů seděl s tím, co ukazuje počítadlo */
+  if (!rada[0]) { const j = rada.indexOf(true); rada[j] = false; rada[0] = true; }
+
+  let i = 0, zasah = 0, chyby = 0, aktivni = false, klepnuto = false, tik = null;
+
+  const hlava = el("div", "pocitadlo");
+  hlava.innerHTML = "<span>klepni na</span>" + svgIkona(cil, 36);
+  const cis = el("span", "cis", `0 / ${cilu}`);
+  hlava.appendChild(cis);
+  p.appendChild(hlava);
+
+  const jev = el("div", "jeviste");
+  p.appendChild(jev);
+
+  const pruh = el("div", "pruh");
+  pruh.innerHTML = '<i style="width:0%"></i>';
+  p.appendChild(pruh);
+
+  function ukaz() {
+    if (i >= kolik) return konec();
+    const jeCil = rada[i];
+    aktivni = true; klepnuto = false;
+    jev.className = "jeviste plno";
+    jev.innerHTML = svgIkona(jeCil ? cil : "mrak", 130);
+    tik = pozdeji(() => {
+      if (jeCil && !klepnuto) { chyby++; zvukNe(); }   /* nestihl */
+      dalsiObrazek();
+    }, doba);
+  }
+  function dalsiObrazek() {
+    clearTimeout(tik);
+    aktivni = false;
+    jev.className = "jeviste";
+    jev.innerHTML = "";
+    i++;
+    pruh.firstChild.style.width = (i / kolik * 100) + "%";
+    pozdeji(ukaz, pauza);
+  }
+  jev.onclick = () => {
+    if (!aktivni || klepnuto) return;
+    klepnuto = true;
+    zaznamenejKlik();
+    if (rada[i]) {
+      zasah++; cis.textContent = `${zasah} / ${cilu}`;
+      jev.classList.add("ok"); ton(780, .11);
+      pozdeji(dalsiObrazek, 240);
+    } else {
+      chyby++; zvukNe();
+      jev.classList.add("ne");
+      /* mrak zůstane na place do konce svého času — ať je vidět,
+         že tohle byl ten, na který se nemělo klepat */
+    }
+  };
+
+  function konec() {
+    /* dělím alespoň čtyřmi, aby jedna chyba v krátké řadě neznamenala
+       propadnutí celého kola */
+    /* čas tu nezapisuji: délku kola určuje scénář, ne dítě */
+    pridejPodil("pockej", Math.max(0, 1 - chyby / Math.max(4, cilu)), 1);
+    zvukOk(); razitko(true);
+    poKole(700);
+  }
+
+  pozdeji(ukaz, 900);   /* chvilka na rozhlédnutí, než to začne */
+}
+
+/* =====================================================================
+   Pamatuj si pořadí
+   Řada se po každém zvládnutém kole prodlouží o jeden obrázek. Po první
+   chybě se tatáž řada přehraje ještě raz — druhá šance se počítá za půl,
+   ale neukončí hru. Pětiletý potřebuje spíš opakování než verdikt.
+   ===================================================================== */
+function hraPoradi(p) {
+  const znaky = [
+    { jm: "jablko", b: "cervena", f: 392 },
+    { jm: "hvezda", b: "zluta",   f: 494 },
+    { jm: "kapka",  b: "modra",   f: 587 },
+    { jm: "list",   b: "zelena",  f: 698 },
+  ];
+  const od = tezke() ? 3 : 2;
+  const az = tezke() ? 6 : 5;
+  const urovni = az - od + 1;
+
+  let delka = od, skore = 0, druhyPokus = false;
+  let rada = [], poz = 0, prijima = false;
+
+  const hlava = el("div", "pocitadlo");
+  hlava.innerHTML = "<span>řada</span>";
+  const cis = el("span", "cis", `1 / ${urovni}`);
+  hlava.appendChild(cis);
+  p.appendChild(hlava);
+
+  const g = el("div", "ctyrka ceka");
+  znaky.forEach((z, idx) => {
+    const b = el("button");
+    b.style.borderColor = `var(--b-${z.b})`;
+    b.innerHTML = svgIkona(z.jm, 60, `var(--b-${z.b})`);
+    b.onclick = () => klep(idx, b);
+    g.appendChild(b);
+  });
+  p.appendChild(g);
+
+  const stit = el("div", "stitek", "Koukej…");
+  p.appendChild(stit);
+
+  function rozsvit(idx, ms) {
+    const b = g.children[idx];
+    b.classList.add("sviti");
+    b.style.background =
+      `color-mix(in srgb, var(--b-${znaky[idx].b}) 34%, var(--karta))`;
+    ton(znaky[idx].f, .26, 0, .14);
+    pozdeji(() => { b.classList.remove("sviti"); b.style.background = ""; }, ms);
+  }
+
+  function prehraj() {
+    prijima = false; poz = 0;
+    g.classList.add("ceka");
+    stit.textContent = druhyPokus ? "Ještě jednou, koukej…" : "Koukej…";
+    cis.textContent = `${delka - od + 1} / ${urovni}`;
+    rada.forEach((idx, j) => pozdeji(() => rozsvit(idx, 380), 420 + j * 620));
+    pozdeji(() => {
+      prijima = true;
+      g.classList.remove("ceka");
+      stit.textContent = "Teď ty!";
+    }, 420 + rada.length * 620);
+  }
+
+  function noveKolo() {
+    rada = [];
+    for (let j = 0; j < delka; j++) rada.push(cele(0, 3));
+    /* dvakrát týž obrázek za sebou se špatně pozná, tak to rozhodím */
+    for (let j = 1; j < rada.length; j++)
+      if (rada[j] === rada[j - 1]) rada[j] = (rada[j] + 1 + cele(0, 2)) % 4;
+    druhyPokus = false;
+    prehraj();
+  }
+
+  function klep(idx, b) {
+    if (!prijima) return;
+    zaznamenejKlik();
+    if (idx === rada[poz]) {
+      rozsvit(idx, 220);
+      poz++;
+      if (poz < rada.length) return;
+      prijima = false;
+      skore += druhyPokus ? .5 : 1;
+      zvukOk();
+      if (delka >= az) return pozdeji(konec, 600);
+      delka++;
+      stit.textContent = "Teď o jeden dýl!";
+      pozdeji(noveKolo, 950);
+      return;
+    }
+    prijima = false;
+    zvukNe();
+    b.classList.add("ne");
+    pozdeji(() => b.classList.remove("ne"), 420);
+    if (!druhyPokus) { druhyPokus = true; pozdeji(prehraj, 950); }
+    else pozdeji(konec, 750);
+  }
+
+  function konec() {
+    /* totéž co u Počkej si — čas je dán přehráváním řady */
+    pridejPodil("poradi", Math.min(1, skore / urovni), 1);
+    razitko(true);
+    poKole(700);
+  }
+
+  noveKolo();
+}
+
+/* =====================================================================
+   Co se změnilo
+   Jako „najdi rozdíl", jenom druhá mřížka nestojí vedle první, ale až
+   po ní. Obrázky jsou všechny různé, aby byla výměna poznatelná —
+   když se dvě jablka opakují, nejde říct, které z nich je nové.
+   ===================================================================== */
+function hraZmena(p) {
+  const poli = tezke() ? 9 : 6;
+  const ikony = vzorek(VSE, poli);
+  const kde = cele(0, poli - 1);
+  const novy = nah(VSE.filter(x => !ikony.includes(x)));
+  const sam = dobaPamatovani === 0;      /* dítě si obrázky schová samo */
+  const dobaKoukani = dobaPamatovani * 1000;
+  const zakryto = `<svg viewBox="0 0 100 100" width="54" height="54" fill="none"
+    stroke="var(--linka)" stroke-width="6" stroke-dasharray="10 9"
+    stroke-linecap="round"><rect x="12" y="12" width="76" height="76" rx="14"/></svg>`;
+
+  const stit = el("div", "stitek", sam
+    ? "Prohlédni si obrázky. Až je budeš umět, klepni dole."
+    : "Prohlédni si obrázky a pamatuj si je…");
+  p.appendChild(stit);
+
+  const g = el("div", "pamet-mrizka");
+  g.style.gridTemplateColumns = "repeat(3,1fr)";
+  ikony.forEach(jm => {
+    const c = el("button");
+    c.innerHTML = svgIkona(jm, 54);
+    g.appendChild(c);
+  });
+  p.appendChild(g);
+
+  let od = null, tlSchovat = null;
+  if (sam) {
+    tlSchovat = el("button", "tl hl", "Už to umím");
+    tlSchovat.style.alignSelf = "center";
+    tlSchovat.onclick = schovej;
+    p.appendChild(tlSchovat);
+  } else {
+    /* pruh ubývá, takže je dopředu vidět, kolik času na koukání ještě je */
+    od = el("div", "odpocet");
+    od.innerHTML = "<i></i>";
+    p.appendChild(od);
+    requestAnimationFrame(() => {
+      od.firstChild.style.transition = `width ${dobaKoukani}ms linear`;
+      od.firstChild.style.width = "0%";
+    });
+    pozdeji(schovej, dobaKoukani);
+  }
+
+  function schovej() {
+    if (!g.isConnected) return;
+    stit.textContent = "A teď pozor…";
+    if (od) od.style.visibility = "hidden";
+    if (tlSchovat) tlSchovat.remove();
+    [...g.children].forEach(c => { c.innerHTML = zakryto; });
+    ton(300, .14);
+    pozdeji(odkryj, 800);
+  }
+
+  function odkryj() {
+    stit.textContent = "Který obrázek je jiný než předtím?";
+    const nove = ikony.slice();
+    nove[kde] = novy;
+    [...g.children].forEach((c, i) => {
+      c.innerHTML = svgIkona(nove[i], 54);
+      c.onclick = () => {
+        zaznamenejKlik();
+        if (i === kde) { c.classList.add("ok"); uspech(); }
+        else neuspech(c);
+      };
+    });
+    /* čas na rozmyšlenou se měří od odkrytí, ne od začátku koukání */
+    stav.zacatekUlohy = performance.now();
+    stav.casOdpovedi = 0;
+    ton(680, .12);
+  }
+}
+
+/* =====================================================================
+   Verbální hry
+   Zadání se vždycky i napíše, nejen řekne. Hlas je bonus — ne každý tablet
+   má českou řeč nainstalovanou, a hra, která bez ní nejde hrát, by byla
+   k ničemu. Obrázek navíc slovo prozradí sám.
+   ===================================================================== */
+function kartaSlova(jm) {
+  const k = el("button", "slovo");
+  k.innerHTML = svgIkona(jm, 110) +
+    `<span class="jm">${NAZVY[jm]}</span>` +
+    `<span class="znovu">klepni a uslyšíš to znovu</span>`;
+  k.onclick = () => rekni(NAZVY[jm]);
+  pozdeji(() => rekni(NAZVY[jm]), 450);
+  return k;
+}
+
+/* ---------- Kolik slabik ---------- */
+function hraSlabiky(p) {
+  /* na snadné úrovni jen jedno- a dvojslabičná slova */
+  const pool = tezke() ? SLOVA : SLOVA.filter(x => SLABIKY[x] <= 2);
+  const jm = nah(pool);
+  const spravne = SLABIKY[jm];
+
+  p.appendChild(kartaSlova(jm));
+  p.appendChild(el("div", "stitek", "Kolikrát tleskneš?"));
+
+  const g = el("div", "volby");
+  g.style.gridTemplateColumns = "repeat(3,1fr)";
+  [1, 2, 3].forEach(n => {
+    const b = el("button", "volba");
+    b.style.minHeight = "clamp(86px,13vh,130px)";
+    b.innerHTML = `<span class="tlesk">${"<i></i>".repeat(n)}</span>`;
+    b.onclick = () => {
+      zaznamenejKlik();
+      if (n === spravne) { b.classList.add("ok"); uspech(); }
+      else neuspech(b);
+    };
+    g.appendChild(b);
+  });
+  p.appendChild(g);
+}
+
+/* ---------- Na jakou hlásku ---------- */
+function hraHlaska(p) {
+  const jm = nah(SLOVA);
+  const spravne = HLASKA[jm];
+  const jine = michej([...new Set(Object.values(HLASKA))]
+    .filter(x => x !== spravne));
+  const moznosti = michej([spravne].concat(jine.slice(0, tezke() ? 3 : 2)));
+
+  p.appendChild(kartaSlova(jm));
+  p.appendChild(el("div", "stitek", "Kterým písmenem slovo začíná?"));
+
+  const g = el("div", "volby");
+  g.style.gridTemplateColumns = `repeat(${moznosti.length},1fr)`;
+  moznosti.forEach(x => {
+    const b = el("button", "volba");
+    b.style.minHeight = "clamp(86px,13vh,130px)";
+    b.innerHTML = `<span class="pismeno">${x}</span>`;
+    b.onclick = () => {
+      zaznamenejKlik();
+      if (x === spravne) { b.classList.add("ok"); uspech(); }
+      else neuspech(b);
+    };
+    g.appendChild(b);
+  });
+  p.appendChild(g);
+}
+
+/* ---------- Poslouchej a ukaž ----------
+   Věty jsou schválně jen v prvním pádě („kde je míč nahoře a dům dole"),
+   aby se dalo skládat ze jmen obrázků bez skloňování. „Nad domem" by znělo
+   líp, ale vyžadovalo by tvary, které by se u každého slova musely hlídat
+   zvlášť — a špatně vyskloňovaná věta je u úlohy na porozumění horší vada
+   než věta trochu toporná. */
+const POLOHY = {
+  nahore: { styl: "top:2%;left:31%",    slovo: "nahoře" },
+  dole:   { styl: "bottom:2%;left:31%", slovo: "dole" },
+  vlevo:  { styl: "left:3%;top:31%",    slovo: "vlevo" },
+  vpravo: { styl: "right:3%;top:31%",   slovo: "vpravo" },
+};
+const DVOJICE_POLOH = [
+  ["nahore", "dole"], ["dole", "nahore"],
+  ["vlevo", "vpravo"], ["vpravo", "vlevo"],
+];
+
+function hraVeta(p) {
+  const [a, b] = vzorek(VSE.filter(x => NAZVY[x]), 2);
+  /* na těžší úrovni jsou čtyři obrázky a věta zmíní jen jednu polohu —
+     druhou si musí domyslet */
+  const kolik = tezke() ? 4 : 3;
+  const varianty = michej(DVOJICE_POLOH).slice(0, kolik);
+  const spravna = nah(varianty);
+
+  const veta = tezke()
+    ? `Najdi obrázek, kde je ${NAZVY[a]} ${POLOHY[spravna[0]].slovo}.`
+    : `Najdi obrázek, kde je ${NAZVY[a]} ${POLOHY[spravna[0]].slovo} ` +
+      `a ${NAZVY[b]} ${POLOHY[spravna[1]].slovo}.`;
+
+  const vetaUzel = el("div", "stitek", veta);
+  vetaUzel.style.fontSize = "clamp(15px,2.3vw,19px)";
+  vetaUzel.style.color = "var(--ink)";
+  p.appendChild(vetaUzel);
+
+  const g = el("div", "volby");
+  g.style.gridTemplateColumns = kolik === 4 ? "repeat(2,1fr)" : "repeat(3,1fr)";
+  varianty.forEach(v => {
+    const t = el("button", "volba");
+    t.style.minHeight = "clamp(130px,21vh,200px)";
+    t.innerHTML =
+      `<span class="scenka">` +
+      svgIkona(a, 60).replace("<svg", `<svg style="${POLOHY[v[0]].styl}"`) +
+      svgIkona(b, 60).replace("<svg", `<svg style="${POLOHY[v[1]].styl}"`) +
+      `</span>`;
+    t.onclick = () => {
+      zaznamenejKlik();
+      if (v === spravna) { t.classList.add("ok"); uspech(); }
+      else neuspech(t);
+    };
+    g.appendChild(t);
+  });
+  p.appendChild(g);
+
+  const znovu = el("button", "tl");
+  znovu.textContent = "Přečti větu znovu";
+  znovu.style.alignSelf = "center";
+  znovu.onclick = () => rekni(veta);
+  p.appendChild(znovu);
+  pozdeji(() => rekni(veta), 450);
+}
+
+/* =====================================================================
+   Sudoku
+   Latinský čtverec 4×4 ze čtyř tvarů: v každém řádku i sloupci je každý
+   tvar právě jednou. Správnost kontroluju podle pravidla, ne podle toho
+   jediného řešení, ze kterého jsem zadání vyrobil — po odebrání políček
+   jich bývá víc a vyhodnotit dobré řešení jako chybu by bylo nefér.
+   ===================================================================== */
+function hraSudoku(p) {
+  const N = 4;
+  const tvary = vzorek(KAT.tvary, N);
+  /* latinský čtverec posouváním řádků, pak zamíchat řádky i sloupce */
+  let mrizka = [];
+  for (let r = 0; r < N; r++) {
+    const radek = [];
+    for (let c = 0; c < N; c++) radek.push((r + c) % N);
+    mrizka.push(radek);
+  }
+  const poradiR = michej([...Array(N).keys()]);
+  const poradiC = michej([...Array(N).keys()]);
+  mrizka = poradiR.map(r => poradiC.map(c => mrizka[r][c]));
+
+  const prazdnych = tezke() ? 9 : 6;
+  const dira = new Set(michej([...Array(N * N).keys()]).slice(0, prazdnych));
+  const stav2 = mrizka.flat().map((v, i) => (dira.has(i) ? -1 : v));
+
+  let vybrany = 0, chyby = 0;
+
+  const hlava = el("div", "pocitadlo");
+  hlava.innerHTML = "<span>zbývá</span>";
+  const cis = el("span", "cis", String(prazdnych));
+  hlava.appendChild(cis);
+  p.appendChild(hlava);
+
+  const g = el("div", "sudoku");
+  g.style.gridTemplateColumns = `repeat(${N},1fr)`;
+  stav2.forEach((v, i) => {
+    const b = el("button");
+    if (!dira.has(i)) b.classList.add("dano");
+    b.innerHTML = v >= 0 ? svgIkona(tvary[v], 50) : "";
+    b.onclick = () => klepni(i, b);
+    g.appendChild(b);
+  });
+  p.appendChild(g);
+
+  const paleta = el("div", "paleta");
+  tvary.forEach((t, idx) => {
+    const b = el("button");
+    b.innerHTML = svgIkona(t, 46);
+    b.setAttribute("aria-pressed", String(idx === 0));
+    b.onclick = () => {
+      vybrany = idx;
+      [...paleta.children].forEach((x, j) =>
+        x.setAttribute("aria-pressed", String(j === idx)));
+      ton(700 + idx * 60, .07);
+    };
+    paleta.appendChild(b);
+  });
+  p.appendChild(paleta);
+  const navod = "Vyber dole tvar a klepni, kam patří. " +
+                "Klepnutím na vložený tvar ho smažeš.";
+  const stit = el("div", "stitek", navod);
+  p.appendChild(stit);
+
+  const znovu = el("button", "tl");
+  znovu.textContent = "Začít tabulku znovu";
+  znovu.style.alignSelf = "center";
+  znovu.style.display = "none";
+  znovu.onclick = () => {
+    [...g.children].forEach((b, i) => {
+      if (dira.has(i)) { stav2[i] = -1; b.innerHTML = ""; }
+    });
+    cis.textContent = String(prazdnych);
+    stit.textContent = navod;
+    znovu.style.display = "none";
+    ton(520, .12);
+  };
+  p.appendChild(znovu);
+
+  const sedi = (i, v) => {
+    const r = Math.floor(i / N), c = i % N;
+    for (let j = 0; j < N; j++) {
+      if (j !== c && stav2[r * N + j] === v) return false;
+      if (j !== r && stav2[j * N + c] === v) return false;
+    }
+    return true;
+  };
+
+  function klepni(i, b) {
+    if (!dira.has(i)) return;              /* zadané tvary jsou napevno */
+    zaznamenejKlik();
+    if (stav2[i] >= 0) {                   /* smazat, co tam dítě dalo */
+      stav2[i] = -1; b.innerHTML = ""; ton(360, .07);
+      cis.textContent = String(stav2.filter(x => x < 0).length);
+      zkontrolujSlepouUlicku();
+      return;
+    }
+    if (!sedi(i, vybrany)) {
+      chyby++; zvukNe();
+      b.classList.add("ne");
+      pozdeji(() => b.classList.remove("ne"), 420);
+      return;
+    }
+    stav2[i] = vybrany;
+    b.innerHTML = svgIkona(tvary[vybrany], 50);
+    b.classList.add("ted");
+    pozdeji(() => b.classList.remove("ted"), 400);
+    ton(620 + vybrany * 50, .1);
+    const zbyva = stav2.filter(x => x < 0).length;
+    cis.textContent = String(zbyva);
+    if (zbyva === 0) {
+      pridejPodil("sudoku", Math.max(0, 1 - chyby / prazdnych), 1,
+                  performance.now() - stav.zacatekUlohy);
+      zvukOk(); razitko(true);
+      poKole(680);
+      return;
+    }
+    zkontrolujSlepouUlicku();
+  }
+
+  /* Každý jednotlivý tah může být podle pravidla v pořádku, a přesto se jimi
+     dá zabřednout do situace, kde už se nedá pokračovat. Dospělý si domyslí,
+     že musí couvnout; pětiletý jen uvidí, že mu appka nic nedovolí, a vzdá
+     to. Tak mu to radši řeknu — a nepočítám to jako chybu, protože to chyba
+     v pravém slova smyslu není. */
+  function zkontrolujSlepouUlicku() {
+    const slepa = stav2.some((v, i) =>
+      v < 0 && !tvary.some((_, t) => sedi(i, t)));
+    stit.textContent = slepa
+      ? "Tahle cesta nevyšla — některé políčko už nejde doplnit. Smaž pár tvarů, nebo začni tabulku znovu."
+      : navod;
+    znovu.style.display = slepa ? "" : "none";
+  }
+}
+
+/* =====================================================================
    Odměna
    ===================================================================== */
 function odmena() {
-  const cesta = stav.rezim === "cesta";
+  const rezim = stav.rezim;
+  const cesta = rezim !== "hra";
   const hra = stav.polozky[0].h;
 
   let uloh = 0, naPrvni = 0;
@@ -1246,9 +2264,11 @@ function odmena() {
   if (cesta) {
     vysledky.behy.push({
       datum: new Date().toISOString(),
-      podil, uroven: obtiznost, oblasti: poOblastech
+      typ: rezim,            /* "cesta", "soustredeni" nebo "zkouska" */
+      podil, uroven: obtiznost, oblasti: poOblastech,
+      skupiny: podleOblasti(stav.tally)
     });
-    if (vysledky.behy.length > 30) vysledky.behy = vysledky.behy.slice(-30);
+    if (vysledky.behy.length > 60) vysledky.behy = vysledky.behy.slice(-60);
     ulozVysledky();
   }
   zvukHotovo();
@@ -1266,19 +2286,50 @@ function odmena() {
   }
   o.appendChild(hv);
 
-  const nadpis = cesta
+  const nadpis = rezim === "cesta"
     ? (ziskane === 3 ? "Celou cestu bez zaváhání!"
       : ziskane === 2 ? "Cesta je za tebou!" : "Došel jsi až na konec!")
+    : rezim === "soustredeni"
+    ? (ziskane === 3 ? "Vydržel jsi u všeho!"
+      : ziskane === 2 ? "Celé cvičení hotové!" : "Dotáhl jsi to do konce!")
+    : rezim === "zkouska"
+    ? (ziskane === 3 ? "Zkoušku bys dal levou zadní!"
+      : ziskane === 2 ? "Zkouška je hotová!" : "Celou zkoušku jsi prošel!")
     : (ziskane === 3 ? "Bez jediné chyby!"
       : ziskane === 2 ? "Moc pěkně!" : "Hotovo!");
   o.appendChild(el("h2", null, nadpis));
-  o.appendChild(el("p", null, cesta
+  o.appendChild(el("p", null, rezim === "cesta"
     ? `Prošel jsi všech devět her. Celkem už máš <b>${hvezdyCelkem}</b> hvězdiček.`
+    : rezim === "soustredeni"
+    ? `Všechny čtyři hry na soustředění. Celkem už máš <b>${hvezdyCelkem}</b> hvězdiček.`
+    : rezim === "zkouska"
+    ? `Patnáct úloh ze tří oblastí. Celkem už máš <b>${hvezdyCelkem}</b> hvězdiček.`
     : `${hra.jm} máš za sebou. Celkem už jsi nasbíral <b>${hvezdyCelkem}</b> hvězdiček.`));
+
+  /* U zkoušky je zajímavější než hvězdičky to, jak dopadly jednotlivé
+     oblasti — právě ty škola u talentovek hodnotí zvlášť. */
+  if (rezim === "zkouska") {
+    const sk = podleOblasti(stav.tally);
+    const box = el("div", "oblasti-vysledek");
+    ["logika", "matematika", "rec"].forEach(key => {
+      const o = sk[key];
+      if (!o || !o.uloh) return;
+      const x = o.naPrvni / o.uloh;
+      const r = el("div", "r");
+      r.innerHTML = `<div class="n">${OBLASTI[key]}</div>` +
+        `<div class="pr"><div class="mini"><i style="width:${Math.round(x * 100)}%;` +
+        `background:${barvaPodilu(x)}"></i></div>` +
+        `<div class="h">${procenta(x)}</div></div>`;
+      box.appendChild(r);
+    });
+    o.appendChild(box);
+  }
 
   const t = el("div", "tlacitka");
   const znovu = el("button", "tl hl", "Ještě jednou");
-  znovu.onclick = () => cesta ? spustCestu() : spustHru(hra);
+  znovu.onclick = () => rezim === "cesta" ? spustCestu()
+    : rezim === "soustredeni" ? spustSoustredeni()
+    : rezim === "zkouska" ? spustZkousku() : spustHru(hra);
   const zpet = el("button", "tl", cesta ? "Zpátky na výběr" : "Vybrat jinou hru");
   zpet.onclick = domu;
   t.appendChild(znovu); t.appendChild(zpet);
@@ -1297,6 +2348,7 @@ const barvaPodilu = x =>
 
 function obrazovkaRodic() {
   stav = null;
+  zrusCasovace();
   $("#app").classList.remove("domovska");
   $("#zpet").classList.add("vid");
   $("#nadpis").textContent = "Přehled pro rodiče";
@@ -1315,39 +2367,96 @@ function obrazovkaRodic() {
     "ne jednotlivé sezení."));
 
   /* ---- podle oblastí ---- */
-  const box1 = el("div", "karta-box");
-  box1.appendChild(el("h3", null, "Podle oblastí"));
   let nejakaData = false;
-  HRY.forEach(h => {
+  const radekOblasti = (h, box) => {
     const o = vysledky.oblasti[h.id];
-    if (!o || !o.uloh) return;
-    nejakaData = true;
+    if (!o || !o.uloh) return false;
     const u = o.naPrvni / o.uloh;
     const cas = prumernyCas(h.id);
     const r = el("div", "oblast-radek");
     r.innerHTML =
       `<div><div class="jm">${h.jm}</div>` +
-      `<div class="det">${o.uloh} úloh` +
-      (cas ? ` · ${(cas / 1000).toFixed(1)} s na rozmyšlenou` : "") + `</div></div>` +
+      `<div class="det">${Math.round(o.uloh)} ` +
+      (h.pozor ? "kol" : "úloh") +
+      (cas ? ` · ${(cas / 1000).toFixed(1)} s ` +
+        (h.casPopis || "na rozmyšlenou") : "") +
+      `</div></div>` +
       `<div class="mini"><i style="width:${Math.round(u * 100)}%;` +
       `background:${barvaPodilu(u)}"></i></div>` +
       `<div class="hod">${procenta(u)}</div>`;
-    box1.appendChild(r);
-  });
-  if (!nejakaData) {
+    box.appendChild(r);
+    return true;
+  };
+
+  const box1 = el("div", "karta-box");
+  box1.appendChild(el("h3", null, "Myšlení, zrak a ruka"));
+  HRY.forEach(h => { if (radekOblasti(h, box1)) nejakaData = true; });
+  if (box1.querySelectorAll(".oblast-radek").length === 0) {
     box1.appendChild(el("p", "pozn",
       "Zatím tu nic není — až si Honzík něco zahraje, objeví se to tady."));
   }
   p.appendChild(box1);
 
-  /* ---- velké cesty ---- */
-  if (vysledky.behy.length) {
-    const box2 = el("div", "karta-box");
-    box2.appendChild(el("h3", null, "Velké cesty"));
-    box2.appendChild(el("p", "pozn",
-      "Každý sloupec je jedna dokončená cesta. Skladba úloh je vždycky " +
-      "stejná, takže jsou porovnatelné."));
-    const posledni = vysledky.behy.slice(-12);
+  const box1b = el("div", "karta-box");
+  box1b.appendChild(el("h3", null, "Soustředění a pozornost"));
+  HRY_POZOR.forEach(h => { if (radekOblasti(h, box1b)) nejakaData = true; });
+  if (box1b.querySelectorAll(".oblast-radek").length === 0) {
+    box1b.appendChild(el("p", "pozn",
+      "Hry na soustředění zatím nehrál. U nich se nepočítají úlohy na " +
+      "první pokus, ale celé kolo: kolik cílů našel a kolik mu jich " +
+      "uteklo nebo kolikrát klepl vedle."));
+  } else {
+    box1b.appendChild(el("p", "pozn",
+      "Tady procento neznamená bez chyby, ale kolik z kola vyšlo — " +
+      "u Počkej si se do něj počítají i obrázky, na které nestihl klepnout."));
+  }
+  p.appendChild(box1b);
+
+  const box1c = el("div", "karta-box");
+  box1c.appendChild(el("h3", null, "Na talentovky"));
+  HRY_ZKOUSKA.forEach(h => { if (radekOblasti(h, box1c)) nejakaData = true; });
+  if (box1c.querySelectorAll(".oblast-radek").length === 0) {
+    box1c.appendChild(el("p", "pozn",
+      "Hry ke zkouškám zatím nehrál. Pokrývají tři oblasti, které Svět " +
+      "vzdělání u talentovek sleduje: logické, matematické a verbální " +
+      "předpoklady."));
+  }
+  p.appendChild(box1c);
+
+  /* ---- poslední zkouška nanečisto po oblastech ---- */
+  const zkousky = vysledky.behy.filter(b => b.typ === "zkouska" && b.skupiny);
+  if (zkousky.length) {
+    const z = zkousky[zkousky.length - 1];
+    const box = el("div", "karta-box");
+    box.appendChild(el("h3", null, "Poslední zkouška nanečisto"));
+    box.appendChild(el("p", "pozn",
+      `${new Date(z.datum).toLocaleDateString("cs-CZ")}, ` +
+      `${z.uroven === "tezka" ? "těžší" : "snadná"} úroveň. Tohle jsou ` +
+      "tři oblasti tak, jak je dělí škola."));
+    ["logika", "matematika", "rec"].forEach(key => {
+      const o = z.skupiny[key];
+      if (!o || !o.uloh) return;
+      const u = o.naPrvni / o.uloh;
+      const r = el("div", "oblast-radek");
+      r.innerHTML = `<div><div class="jm">${OBLASTI[key]}</div>` +
+        `<div class="det">${Math.round(o.uloh)} úloh</div></div>` +
+        `<div class="mini"><i style="width:${Math.round(u * 100)}%;` +
+        `background:${barvaPodilu(u)}"></i></div>` +
+        `<div class="hod">${procenta(u)}</div>`;
+      box.appendChild(r);
+    });
+    p.appendChild(box);
+  }
+
+  /* ---- grafy dokončených sad ---- */
+  const grafBehu = (typ, titul, popis) => {
+    /* běhy bez „typ" jsou z doby před hrami na soustředění, tedy Velké cesty */
+    const behy = vysledky.behy.filter(b => (b.typ || "cesta") === typ);
+    if (!behy.length) return;
+    const box = el("div", "karta-box");
+    box.appendChild(el("h3", null, titul));
+    box.appendChild(el("p", "pozn", popis));
+    const posledni = behy.slice(-12);
     const graf = el("div", "behy");
     posledni.forEach(b => {
       const d = el("div");
@@ -1357,35 +2466,47 @@ function obrazovkaRodic() {
         " · " + procenta(b.podil);
       graf.appendChild(d);
     });
-    box2.appendChild(graf);
+    box.appendChild(graf);
     const p1 = posledni[posledni.length - 1];
-    box2.appendChild(el("p", "pozn",
-      `Poslední cesta: <b>${procenta(p1.podil)}</b> ` +
+    box.appendChild(el("p", "pozn",
+      `Naposledy: <b>${procenta(p1.podil)}</b> ` +
       `(${p1.uroven === "tezka" ? "těžší" : "snadná"} úroveň, ` +
       `${new Date(p1.datum).toLocaleDateString("cs-CZ")}).`));
-    p.appendChild(box2);
-  }
+    p.appendChild(box);
+  };
+  grafBehu("cesta", "Velké cesty",
+    "Každý sloupec je jedna dokončená cesta. Skladba úloh je vždycky " +
+    "stejná, takže jsou porovnatelné.");
+  grafBehu("zkouska", "Zkoušky nanečisto",
+    "Pevná skladba patnácti úloh, pět z každé oblasti — jednotlivé zkoušky " +
+    "jsou tedy porovnatelné mezi sebou. Sloupec je celkový výsledek.");
+  grafBehu("soustredeni", "Cvičení soustředění",
+    "Vlastní řada, oddělená od Velké cesty — ta má svou pevnou skladbu " +
+    "a přidáním nových her by přestala být srovnatelná se starším měřením.");
 
   /* ---- na co se zaměřit ---- */
   const box3 = el("div", "karta-box");
   box3.appendChild(el("h3", null, "Na co se zaměřit"));
-  const slabe = HRY
+  /* U her na soustředění je jedna „úloha" celé kolo, kterých se za sezení
+     odehraje míň — proto u nich stačí na závěr tři kola, ne šest úloh. */
+  const prah = h => h.pozor ? 3 : 6;
+  const slabe = VSECHNY_HRY
     .map(h => ({ h, u: uspesnostOblasti(h.id),
                  n: (vysledky.oblasti[h.id] || {}).uloh || 0 }))
-    .filter(x => x.n >= 6 && x.u !== null && x.u < .8)
+    .filter(x => x.n >= prah(x.h) && x.u !== null && x.u < .8)
     .sort((a, b) => a.u - b.u)
     .slice(0, 3);
 
-  const dostUloh = HRY.filter(h =>
-    ((vysledky.oblasti[h.id] || {}).uloh || 0) >= 6).length;
+  const dostUloh = VSECHNY_HRY.filter(h =>
+    ((vysledky.oblasti[h.id] || {}).uloh || 0) >= prah(h)).length;
 
   if (!nejakaData) {
     box3.appendChild(el("p", "pozn", "Zatím není z čeho vycházet."));
   } else if (!dostUloh) {
     box3.appendChild(el("p", "pozn",
       "Na závěry je zatím málo dat. Počítají se jen oblasti s alespoň šesti " +
-      "úlohami — z méně by to byla náhoda, ne zjištění. Čísla nahoře už " +
-      "vidět jsou, jen je zatím neberte vážně."));
+      "úlohami (u her na soustředění třemi koly) — z méně by to byla náhoda, " +
+      "ne zjištění. Čísla nahoře už vidět jsou, jen je zatím neberte vážně."));
   } else if (!slabe.length) {
     box3.appendChild(el("p", "pozn",
       "Nic výrazně nezaostává. Až bude úloh víc, ukáže se tu, kde to jde " +
@@ -1393,19 +2514,39 @@ function obrazovkaRodic() {
   } else {
     const ul = el("ul", "rada-doporuceni");
     slabe.forEach(({ h, u }) => {
+      const mn = h.listy &&
+        (h.listy.includes("–") || h.listy.includes(",")) ? "listy" : "list";
+      const sada = h.sada === "soustredeni" ? " ze sady na soustředění" : "";
       ul.appendChild(el("li", null,
         `<b>${h.jm}</b> (${h.kat}) — ${procenta(u)}. ` +
-        (h.listy
-          ? `Na papíře na to sedí ${h.listy.includes("–") || h.listy.includes(",")
-              ? "listy" : "list"} ${h.listy}.`
+        (h.rada ? h.rada
+          : h.listy ? `Na papíře na to sedí ${mn} ${h.listy}${sada}.`
           : "Tahle oblast nemá tištěný list, procvičí se hraním.")));
     });
     box3.appendChild(ul);
     box3.appendChild(el("p", "pozn",
-      "Počítají se jen oblasti s alespoň šesti úlohami — z méně dat by to " +
-      "byla náhoda, ne zjištění."));
+      "Počítají se jen oblasti s alespoň šesti úlohami, u her na " +
+      "soustředění třemi koly — z méně dat by to byla náhoda, ne zjištění."));
   }
   p.appendChild(box3);
+
+  /* ---- nastavení ---- */
+  const box4 = el("div", "karta-box");
+  box4.appendChild(el("h3", null, "Doba na prohlédnutí"));
+  box4.appendChild(el("p", "pozn",
+    "Jak dlouho jsou vidět obrázky ve hře <b>Co se změnilo</b>, než se zakryjí. " +
+    "Osm sekund na šest obrázků je rozumný začátek; na těžší úrovni jich je " +
+    "devět, takže se hodí přidat. <b>Sám</b> znamená, že si je Honzík schová " +
+    "klepnutím, až bude chtít — pak si tempo určuje on a nic ho nehoní."));
+  const volic = el("div", "volic");
+  DOBY.forEach(v => {
+    const b = el("button", null, v ? v + " s" : "sám");
+    b.setAttribute("aria-pressed", String(v === dobaPamatovani));
+    b.onclick = () => { nastavDobu(v); ton(760, .08); obrazovkaRodic(); };
+    volic.appendChild(b);
+  });
+  box4.appendChild(volic);
+  p.appendChild(box4);
 
   /* ---- vymazání ---- */
   const t = el("div", "tlacitka");
