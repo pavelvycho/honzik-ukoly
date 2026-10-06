@@ -1937,14 +1937,25 @@ function hraZmena(p) {
     tlSchovat.onclick = schovej;
     p.appendChild(tlSchovat);
   } else {
-    /* pruh ubývá, takže je dopředu vidět, kolik času na koukání ještě je */
+    /* Pruh ubývá, takže je dopředu vidět, kolik času na koukání ještě je.
+       Šířku počítám v každém snímku ze skutečných hodin, místo abych ji
+       svěřil přechodu v CSS. Přechod se totiž spouští změnou stylu hned po
+       vložení prvku do stránky, a když prohlížeč mezitím nestihne spočítat
+       výchozí stav, žádný přechod nenaběhne — pruh buď zůstane plný, nebo
+       okamžitě zmizí. Na tabletu se to projevilo tak, že po pár kolech
+       odpočet „přestal ubývat". Takhle je navíc pruh po každém uspání
+       obrazovky zase na správném místě, protože se dopočítá, ne dopřehraje. */
     od = el("div", "odpocet");
     od.innerHTML = "<i></i>";
     p.appendChild(od);
-    requestAnimationFrame(() => {
-      od.firstChild.style.transition = `width ${dobaKoukani}ms linear`;
-      od.firstChild.style.width = "0%";
-    });
+    const zacatekKoukani = performance.now();
+    const pruhTik = () => {
+      if (!od.isConnected) return;          /* dítě mezitím odešlo */
+      const zbyva = Math.max(0, 1 - (performance.now() - zacatekKoukani) / dobaKoukani);
+      od.firstChild.style.width = (zbyva * 100).toFixed(2) + "%";
+      if (zbyva > 0) requestAnimationFrame(pruhTik);
+    };
+    pruhTik();
     pozdeji(schovej, dobaKoukani);
   }
 
