@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="ikona-192.png">
 </head>
 <body>
-<title>Tajné písmo</title>
+<title>Klárčiny úkoly</title>
 
 <style>
 /* ---------- stejný svět jako Honzíkovy úkoly: inkoust na papíře ---------- */
@@ -79,6 +79,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
        display:flex;flex-direction:column}
 .wrap{width:100%;max-width:820px;margin:0 auto;flex:1;
       display:flex;flex-direction:column;gap:14px}
+.wrap.stred{justify-content:center}
 
 /* ---------- úvod ---------- */
 .uvod{text-align:center;padding:4px 0 0}
@@ -237,6 +238,82 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     padding:13px 22px;font-weight:700;font-size:16px;background:var(--karta)}
 .tl:active{transform:translateY(4px);box-shadow:0 0 0 var(--stin)}
 .tl.hl{background:var(--ink);color:var(--papir)}
+
+/* ---------- oddíly na rozcestníku ---------- */
+.sekce{padding:10px 2px 0}
+.sekce b{display:block;font-size:15px;font-weight:700;margin-bottom:2px}
+.sekce span{font-size:12.5px;color:var(--ink2);line-height:1.45}
+.dlazdice.tri{grid-template-columns:repeat(3,1fr)}
+@media (max-width:620px){.dlazdice.tri{grid-template-columns:1fr}}
+
+/* ---------- obdélník z teček ---------- */
+.obdelnik{
+  display:grid;gap:clamp(6px,1.6vw,12px);justify-content:center;
+  background:var(--karta);border:3px solid var(--ink);border-radius:20px;
+  box-shadow:0 5px 0 var(--stin);padding:clamp(12px,3vw,22px);
+  margin:0 auto;transition:transform .45s cubic-bezier(.3,1.2,.5,1);
+}
+.obdelnik i{
+  display:block;width:clamp(16px,3.6vw,30px);aspect-ratio:1;border-radius:50%;
+  background:var(--b-fialova);
+}
+.priklad{text-align:center;font-size:clamp(26px,6vw,44px);font-weight:700;
+         letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.priklad em{font-style:normal;color:var(--ink2)}
+.objev{background:color-mix(in srgb,var(--zelena) 13%,var(--karta));
+  border:2.5px solid var(--zelena);border-radius:18px;padding:12px 16px;
+  font-size:14.5px;line-height:1.55;text-align:center}
+
+/* ---------- tabulka násobilky ---------- */
+.nasobilka{
+  display:grid;grid-template-columns:repeat(11,1fr);gap:3px;
+  width:100%;max-width:560px;margin:0 auto;
+}
+.nasobilka > *{
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  border-radius:6px;font-size:clamp(9px,2vw,13px);font-weight:600;
+  background:var(--karta);border:1.5px solid var(--linka);
+  font-variant-numeric:tabular-nums;
+}
+.nasobilka .hlava{background:var(--ink);color:var(--papir);border-color:var(--ink)}
+.nasobilka .roh{background:transparent;border:none}
+.nasobilka button.odemceno{
+  background:color-mix(in srgb,var(--b-fialova) 30%,var(--karta));
+  border-color:var(--b-fialova);
+}
+.nasobilka button.zrcadlo{
+  background:color-mix(in srgb,var(--b-fialova) 13%,var(--karta));
+  border-style:dashed;border-color:var(--b-fialova);
+}
+.nasobilka button.uhlopricka{border-width:2.5px;border-color:var(--ink)}
+
+/* ---------- hodiny ---------- */
+.ciferník{display:block;margin:0 auto;width:min(84vw,330px);height:auto;
+          touch-action:none}
+.ciferník.ne{animation:klepani .4s ease}
+.vyber-rucicky{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.vyber-rucicky button{
+  border:2.5px solid var(--ink);border-radius:999px;padding:9px 16px;
+  font-size:14px;font-weight:600;box-shadow:0 3px 0 var(--stin);
+  background:var(--karta);
+}
+.vyber-rucicky button[aria-pressed="true"]{background:var(--ink);color:var(--papir)}
+.vyber-rucicky button:active{transform:translateY(3px);box-shadow:none}
+.digi{
+  text-align:center;font-size:clamp(30px,7vw,50px);font-weight:700;
+  font-variant-numeric:tabular-nums;letter-spacing:.03em;
+}
+.digi small{font-size:.45em;color:var(--ink2);font-weight:600}
+.volby3{display:grid;gap:10px;grid-template-columns:repeat(3,1fr)}
+.volby3 button{
+  border:3px solid var(--ink);border-radius:18px;box-shadow:0 5px 0 var(--stin);
+  background:var(--karta);padding:clamp(12px,2.6vw,20px) 6px;
+  font-size:clamp(19px,4.2vw,28px);font-weight:700;
+  font-variant-numeric:tabular-nums;
+}
+.volby3 button:active{transform:translateY(4px);box-shadow:0 0 0 var(--stin)}
+.volby3 button.ok{border-color:var(--zelena);animation:buch .45s ease}
+.volby3 button.ne{border-color:var(--cervena);animation:klepani .4s ease}
 
 @keyframes buch{0%{transform:scale(1)}40%{transform:scale(1.07)}100%{transform:scale(1)}}
 @keyframes klepani{0%,100%{transform:translateX(0)}
@@ -432,32 +509,55 @@ function obnovZvuk() {
        <path d="M17 10 L21 14 M21 10 L17 14"/></svg>`;
 }
 
+/* Dlaždice pro násobilku a hodiny — tvarem stejné jako u šifer, aby
+   rozcestník držel pohromadě. */
+const DALSI = [
+  { id: "obdelnik", jm: "Obdélník z teček", barva: "fialova",
+    uk: "3 × 4 = 12", popis: "Proč je 3 × 4 totéž co 4 × 3. Uvidíš to." },
+  { id: "tabulka", jm: "Půlka stačí", barva: "ruzova",
+    uk: "55 ≠ 100", popis: "Kolik příkladů se opravdu musíš naučit." },
+  { id: "procvic", jm: "Procvičuj", barva: "zelena",
+    uk: "7 × 8 = ?", popis: "Deset příkladů. Nápověda je po ruce." },
+  { id: "cteni", jm: "Kolik je hodin", barva: "modra",
+    uk: "🕗", popis: "Přečti ručičky a vyber správný čas." },
+  { id: "nastav", jm: "Nastav ručičky", barva: "oranzova",
+    uk: "7:20", popis: "Chytni ručičku a nastav, co je zadané." },
+  { id: "posun", jm: "Za jak dlouho", barva: "tyrkys",
+    uk: "+ 20 min", popis: "Kolik bude za dvacet minut?" },
+];
+
 function domu() {
   stav = null;
   $("#zpet").classList.remove("vid");
   $("#klicBtn").classList.remove("vid");
-  $("#nadpis").textContent = "Tajné písmo";
+  $("#nadpis").textContent = "Klárčiny úkoly";
   scena.innerHTML = "";
 
   const w = el("div", "wrap");
-  const pozdrav = JMENO ? `Ahoj ${JMENO}!` : "Tajné písmo";
+  const pozdrav = JMENO ? `Ahoj ${JMENO}!` : "Klárčiny úkoly";
   w.appendChild(el("div", "uvod",
     `<h2>${pozdrav}</h2>
-     <p>Čtyři způsoby, jak schovat slovo tak, aby ho přečetl jen ten,
-     kdo zná klíč. Vyber si jeden a lušti — a v Psaní vzkazů si můžeš
-     zašifrovat vlastní zprávu a opsat ji na papír.</p>`));
+     <p>Tajné písmo, násobilka a hodiny. Vyber si, do čeho se dneska
+     pustíš.</p>`));
 
-  const g = el("div", "dlazdice");
-  SIFRY.forEach(s => {
-    const b = el("button", "sifra-t");
-    b.style.setProperty("--tb", `var(--b-${s.barva})`);
-    b.innerHTML = `<b>${s.jm}</b>` +
-      `<span class="uk${s.ukazkaZrcadlove ? " zrc" : ""}">${s.ukazka}</span>` +
-      `<small>${s.popis}</small>`;
-    b.onclick = () => spustSifru(s);
-    g.appendChild(b);
-  });
-  w.appendChild(g);
+  const dlazdice = (polozky, klik, tridy) => {
+    const g = el("div", "dlazdice" + (tridy ? " " + tridy : ""));
+    polozky.forEach(s => {
+      const b = el("button", "sifra-t");
+      b.style.setProperty("--tb", `var(--b-${s.barva})`);
+      b.innerHTML = `<b>${s.jm}</b>` +
+        `<span class="uk${s.ukazkaZrcadlove ? " zrc" : ""}">` +
+        `${s.ukazka || s.uk}</span><small>${s.popis}</small>`;
+      b.onclick = () => klik(s);
+      g.appendChild(b);
+    });
+    return g;
+  };
+
+  w.appendChild(el("div", "sekce",
+    "<b>Tajné písmo</b><span>Čtyři způsoby, jak schovat slovo tak, aby ho " +
+    "přečetl jen ten, kdo zná klíč.</span>"));
+  w.appendChild(dlazdice(SIFRY, spustSifru));
 
   const vz = el("div", "vzkaz-nabidka");
   vz.innerHTML = `<span class="txt"><b>Psaní vzkazů</b>` +
@@ -467,6 +567,16 @@ function domu() {
   tl.onclick = vzkazovnik;
   vz.appendChild(tl);
   w.appendChild(vz);
+
+  w.appendChild(el("div", "sekce",
+    "<b>Násobilka</b><span>Nejdřív proč to funguje, teprve pak " +
+    "procvičování. Naučit se zpaměti něco, čemu člověk rozumí, je " +
+    "mnohem snazší.</span>"));
+  w.appendChild(dlazdice(DALSI.slice(0, 3), s => spustDalsi(s.id), "tri"));
+
+  w.appendChild(el("div", "sekce",
+    "<b>Hodiny</b><span>Ručičkové. Dají se chytit a otáčet s nimi.</span>"));
+  w.appendChild(dlazdice(DALSI.slice(3), s => spustDalsi(s.id), "tri"));
 
   scena.appendChild(w);
 }
@@ -772,6 +882,497 @@ function prepis() {
     .map(sl => s.posuvna ? s.zasifruj(sl, stav.posun) : s.zasifruj(sl))
     .join("   ");
   if (s.posuvna) v.textContent += "   (posun o " + stav.posun + ")";
+}
+
+/* =====================================================================
+   Násobilka a hodiny
+   ===================================================================== */
+const cele = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const hvezdyZ = (chyb, n) => chyb === 0 ? 3 : chyb <= n / 2 ? 2 : 1;
+
+function spustDalsi(id) {
+  const d = DALSI.find(x => x.id === id);
+  stav = { id, kolo: 0, chyb: 0 };
+  $("#zpet").classList.add("vid");
+  $("#klicBtn").classList.remove("vid");
+  $("#nadpis").textContent = d.jm;
+  ({ obdelnik: obdelnikKolo, tabulka: tabulkaNasobilky, procvic: procvicKolo,
+     cteni: hodinyCteni, nastav: hodinyNastav, posun: hodinyPosun })[id]();
+}
+
+function odmenaDalsi(nadpis, text, ziskane, znovu) {
+  zvukHotovo();
+  scena.innerHTML = "";
+  const w = el("div", "wrap stred");
+  const o = el("div", "odmena");
+  const hv = el("div", "hvezdy-rada");
+  for (let i = 0; i < 3; i++) {
+    const sp = el("span", null, hvezdaSvg(56, i < ziskane ? "var(--zluta)" : "none"));
+    sp.style.color = i < ziskane ? "var(--zluta)" : "var(--linka)";
+    hv.appendChild(sp);
+  }
+  o.appendChild(hv);
+  o.appendChild(el("h2", null, nadpis));
+  o.appendChild(el("p", null, text));
+  const t = el("div", "tlacitka");
+  const z1 = el("button", "tl hl", "Ještě jednou");
+  z1.onclick = znovu;
+  const z2 = el("button", "tl", "Zpátky na výběr");
+  z2.onclick = domu;
+  t.appendChild(z1); t.appendChild(z2);
+  o.appendChild(t);
+  w.appendChild(o);
+  scena.appendChild(w);
+}
+
+/* Postupové tečky nahoře, ať je vidět, kolik kol ještě zbývá. */
+function tecky(kolo, celkem) {
+  const p = el("div", "postup");
+  for (let i = 0; i < celkem; i++)
+    p.appendChild(el("div", "tecka" +
+      (i < kolo ? " hot" : i === kolo ? " ted" : "")));
+  return p;
+}
+
+/* Tři tlačítka s čísly — používá to procvičování i obě hodinové úlohy. */
+function volbyCisel(moznosti, spravne, poSpravne, formatuj) {
+  const g = el("div", "volby3");
+  moznosti.forEach(x => {
+    const b = el("button", null, formatuj ? formatuj(x) : String(x));
+    b.onclick = () => {
+      if (x === spravne) {
+        b.classList.add("ok"); zvukOk();
+        /* kdyby Klárka mezitím odešla zpátky na výběr, běh se zahodí */
+        const s0 = stav;
+        setTimeout(() => { if (stav === s0) poSpravne(); }, 620);
+      } else {
+        b.classList.add("ne"); zvukNe(); stav.chyb++;
+        setTimeout(() => b.classList.remove("ne"), 420);
+      }
+    };
+    g.appendChild(b);
+  });
+  return g;
+}
+
+/* Tři možnosti: správná a dvě blízko, ale ne nesmyslně daleko. */
+function triMoznosti(spravne, rozptyl) {
+  const s = new Set([spravne]);
+  let pojistka = 0;
+  while (s.size < 3 && pojistka++ < 60) {
+    const x = spravne + nah(rozptyl) * (Math.random() < .5 ? -1 : 1);
+    if (x > 0) s.add(x);
+  }
+  while (s.size < 3) s.add(spravne + s.size);
+  return michej([...s]);
+}
+
+/* ---------------------------------------------------------------------
+   Obdélník z teček
+   Násobení jako obdélník, ne jako řádek v tabulce. Když se obdélník
+   položí na bok, teček neubude — a přesně odtud plyne, že 3 × 4 je
+   totéž co 4 × 3. Tohle se nedá nadrilovat, tohle se musí vidět.
+   --------------------------------------------------------------------- */
+const OBDELNIK_KOL = 6;
+
+function tecky2D(sloupcu, radku) {
+  const g = el("div", "obdelnik");
+  g.style.gridTemplateColumns = `repeat(${sloupcu},auto)`;
+  for (let i = 0; i < sloupcu * radku; i++) g.appendChild(el("i"));
+  return g;
+}
+
+function obdelnikKolo() {
+  if (stav.kolo >= OBDELNIK_KOL) {
+    return odmenaDalsi("Teď už víš, proč to jde!",
+      "Násobení je obdélník. Když ho otočíš, teček neubude — a to je celý " +
+      "důvod, proč je 3 × 4 totéž co 4 × 3.",
+      hvezdyZ(stav.chyb, OBDELNIK_KOL), () => spustDalsi("obdelnik"));
+  }
+  const a = cele(2, 6), b = cele(2, 8);
+  const soucin = a * b;
+
+  scena.innerHTML = "";
+  const w = el("div", "wrap stred");
+  w.appendChild(tecky(stav.kolo, OBDELNIK_KOL));
+  const nadpis = el("div", "priklad", `${a} <em>×</em> ${b} = ?`);
+  w.appendChild(nadpis);
+  const mrizka = tecky2D(a, b);
+  w.appendChild(mrizka);
+  w.appendChild(el("div", "napoveda",
+    "Spočítej tečky. Můžeš po řádcích, nebo po sloupcích — vyjde to stejně."));
+
+  w.appendChild(volbyCisel(triMoznosti(soucin, [a, b, 1, 2]), soucin, () => {
+    /* a teď to otočit */
+    nadpis.innerHTML = `${b} <em>×</em> ${a} = ${soucin}`;
+    mrizka.replaceWith(tecky2D(b, a));
+    w.querySelector(".napoveda").remove();
+    w.querySelector(".volby3").remove();
+    const objev = el("div", "objev",
+      `Stejných <b>${soucin}</b> teček, jen srovnaných na druhou stranu. ` +
+      `Proto je <b>${a} × ${b}</b> i <b>${b} × ${a}</b> pokaždé ${soucin}.`);
+    w.appendChild(objev);
+    const t = el("div", "tlacitka");
+    const dal = el("button", "tl hl", "Další");
+    dal.onclick = () => { stav.kolo++; obdelnikKolo(); };
+    t.appendChild(dal);
+    w.appendChild(t);
+  }));
+
+  scena.appendChild(w);
+}
+
+/* ---------------------------------------------------------------------
+   Půlka stačí
+   Z té stovky polí je různých příkladů jen 55 — zbytek je zrcadlo přes
+   úhlopříčku. Tohle je zpráva, kterou by každý druhák měl dostat dřív,
+   než se pustí do memorování.
+   --------------------------------------------------------------------- */
+function tabulkaNasobilky() {
+  const odemcene = new Set();          /* klíče "min,max" */
+  scena.innerHTML = "";
+  const w = el("div", "wrap stred");
+
+  w.appendChild(el("div", "uvod",
+    "<h2>Kolik se toho musíš naučit?</h2>" +
+    "<p>Klepni na kterékoli políčko. Rozsvítí se i to na druhé straně " +
+    "úhlopříčky — protože je v něm totéž.</p>"));
+
+  const pocitadlo = el("div", "objev");
+  w.appendChild(pocitadlo);
+
+  const t = el("div", "nasobilka");
+  t.appendChild(el("div", "roh"));
+  for (let c = 1; c <= 10; c++) t.appendChild(el("div", "hlava", String(c)));
+  const bunky = {};
+  for (let r = 1; r <= 10; r++) {
+    t.appendChild(el("div", "hlava", String(r)));
+    for (let c = 1; c <= 10; c++) {
+      const b = el("button");
+      if (r === c) b.classList.add("uhlopricka");
+      b.onclick = () => odemkni(r, c);
+      bunky[r + "," + c] = b;
+      t.appendChild(b);
+    }
+  }
+  w.appendChild(t);
+
+  function obnov() {
+    const n = odemcene.size;
+    pocitadlo.innerHTML = n === 0
+      ? "Políček je sto. Opravdu různých příkladů je ale jen <b>55</b>."
+      : `Odkryla jsi <b>${n}</b> ${n === 1 ? "příklad" : n < 5 ? "příklady" : "příkladů"}` +
+        ` z 55. Políček se přitom rozsvítilo ${[...odemcene].reduce((s, k) => {
+          const [x, y] = k.split(",");
+          return s + (x === y ? 1 : 2);
+        }, 0)}.`;
+  }
+  function odemkni(r, c) {
+    const klic = Math.min(r, c) + "," + Math.max(r, c);
+    odemcene.add(klic);
+    const soucin = r * c;
+    bunky[r + "," + c].textContent = soucin;
+    bunky[r + "," + c].classList.add("odemceno");
+    if (r !== c) {
+      bunky[c + "," + r].textContent = soucin;
+      bunky[c + "," + r].classList.add("zrcadlo");
+    }
+    klik();
+    obnov();
+  }
+  obnov();
+
+  const tl = el("div", "tlacitka");
+  const vse = el("button", "tl", "Odkrýt všechno");
+  vse.onclick = () => {
+    for (let r = 1; r <= 10; r++) for (let c = 1; c <= 10; c++) odemkni(r, c);
+  };
+  const zpet = el("button", "tl hl", "Zpátky na výběr");
+  zpet.onclick = domu;
+  tl.appendChild(vse); tl.appendChild(zpet);
+  w.appendChild(tl);
+  scena.appendChild(w);
+}
+
+/* ---------------------------------------------------------------------
+   Procvičuj
+   --------------------------------------------------------------------- */
+const PROCVIC_KOL = 10;
+const SNADNE = [2, 3, 4, 5, 10];
+
+function procvicKolo() {
+  if (stav.kolo >= PROCVIC_KOL) {
+    return odmenaDalsi(
+      stav.chyb === 0 ? "Deset z deseti!" : "Hotovo!",
+      stav.chyb === 0
+        ? "Ani jednou ses nespletla."
+        : `Zaseklo se to ${stav.chyb}×, ale všech deset je za tebou.`,
+      hvezdyZ(stav.chyb, PROCVIC_KOL), () => spustDalsi("procvic"));
+  }
+  /* první čtyři z lehčí řady, pak celá násobilka */
+  const a = stav.kolo < 4 ? nah(SNADNE) : cele(2, 10);
+  const b = stav.kolo < 4 ? cele(2, 10) : cele(2, 10);
+  const soucin = a * b;
+
+  scena.innerHTML = "";
+  const w = el("div", "wrap stred");
+  w.appendChild(tecky(stav.kolo, PROCVIC_KOL));
+  w.appendChild(el("div", "priklad", `${a} <em>×</em> ${b} = ?`));
+
+  const misto = el("div");
+  w.appendChild(misto);
+  w.appendChild(volbyCisel(triMoznosti(soucin, [a, b, 1, 2]), soucin, () => {
+    stav.kolo++; procvicKolo();
+  }));
+
+  const t = el("div", "tlacitka");
+  const napoveda = el("button", "tl", "Ukaž tečky");
+  napoveda.onclick = () => {
+    napoveda.remove();
+    misto.appendChild(tecky2D(a, b));
+  };
+  t.appendChild(napoveda);
+  w.appendChild(t);
+  scena.appendChild(w);
+}
+
+/* ---------------------------------------------------------------------
+   Hodiny
+   Ručičkový ciferník. Hodinová ručička se posouvá i podle minut — ve
+   čtvrt na osm nestojí na sedmičce, ale kousek za ní. Kdyby stála
+   napevno, naučila by se Klárka číst čas, který na skutečných hodinách
+   neexistuje.
+   --------------------------------------------------------------------- */
+const DIGI = (h, m) => `${h}:${String(m).padStart(2, "0")}`;
+
+function ciferník(h, m, tahatelne, poZmene) {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("viewBox", "0 0 200 200");
+  svg.setAttribute("class", "ciferník");
+
+  const el2 = (t, atr) => {
+    const e = document.createElementNS(NS, t);
+    for (const k in atr) e.setAttribute(k, atr[k]);
+    return e;
+  };
+  svg.appendChild(el2("circle", { cx: 100, cy: 100, r: 94,
+    fill: "var(--karta)", stroke: "var(--ink)", "stroke-width": 5 }));
+
+  for (let i = 0; i < 60; i++) {
+    const uhel = i * 6 * Math.PI / 180;
+    const velka = i % 5 === 0;
+    const r1 = velka ? 76 : 82, r2 = 88;
+    svg.appendChild(el2("line", {
+      x1: 100 + Math.sin(uhel) * r1, y1: 100 - Math.cos(uhel) * r1,
+      x2: 100 + Math.sin(uhel) * r2, y2: 100 - Math.cos(uhel) * r2,
+      stroke: velka ? "var(--ink)" : "var(--linka)",
+      "stroke-width": velka ? 3.4 : 1.8, "stroke-linecap": "round" }));
+  }
+  for (let i = 1; i <= 12; i++) {
+    const uhel = i * 30 * Math.PI / 180;
+    const t = el2("text", {
+      x: 100 + Math.sin(uhel) * 62, y: 100 - Math.cos(uhel) * 62,
+      "text-anchor": "middle", "dominant-baseline": "central",
+      "font-size": 19, "font-weight": 700, fill: "var(--ink)" });
+    t.textContent = i;
+    svg.appendChild(t);
+  }
+
+  const mala = el2("line", { stroke: "var(--ink)", "stroke-width": 8.5,
+    "stroke-linecap": "round" });
+  const velka = el2("line", { stroke: "var(--b-modra)", "stroke-width": 6,
+    "stroke-linecap": "round" });
+  svg.appendChild(mala); svg.appendChild(velka);
+  svg.appendChild(el2("circle", { cx: 100, cy: 100, r: 7,
+    fill: "var(--ink)" }));
+
+  function vykresli() {
+    const uM = ((h % 12) * 30 + m * 0.5) * Math.PI / 180;
+    const uV = (m * 6) * Math.PI / 180;
+    mala.setAttribute("x1", 100); mala.setAttribute("y1", 100);
+    mala.setAttribute("x2", 100 + Math.sin(uM) * 44);
+    mala.setAttribute("y2", 100 - Math.cos(uM) * 44);
+    velka.setAttribute("x1", 100); velka.setAttribute("y1", 100);
+    velka.setAttribute("x2", 100 + Math.sin(uV) * 72);
+    velka.setAttribute("y2", 100 - Math.cos(uV) * 72);
+  }
+  vykresli();
+
+  if (tahatelne) {
+    /* Která ručička se táhne, se nehádá z místa doteku, ale vybírá
+       tlačítkem. Uhodnout to z prstu nejde spolehlivě: malá se posouvá
+       i s minutami, takže obě míří podobným směrem skoro pořád, a dítě
+       pak chytne tu druhou, než chtělo. Navíc je tím pojmenované, co je
+       co — a to je přesně to, co se tu má naučit. */
+    let tahana = "mala";
+    const bod = e => {
+      const r = svg.getBoundingClientRect();
+      return { x: (e.clientX - r.left) / r.width * 200,
+               y: (e.clientY - r.top) / r.height * 200 };
+    };
+    const uhelZ = p => {
+      const u = Math.atan2(p.x - 100, 100 - p.y) * 180 / Math.PI;
+      return (u + 360) % 360;
+    };
+    let tahnu = false;
+    const posun = e => {
+      const p = bod(e);
+      if (Math.hypot(p.x - 100, p.y - 100) < 14) return;   /* u středu nic */
+      const u = uhelZ(p);
+      if (tahana === "velka") {
+        const nove = (Math.round(u / 30) * 5) % 60;        /* po pěti minutách */
+        if (nove !== m) { m = nove; klik(); }
+      } else {
+        const nove = Math.round(u / 30) % 12 || 12;
+        if (nove !== h) { h = nove; klik(); }
+      }
+      vykresli();
+      if (poZmene) poZmene(h, m);
+    };
+    svg.addEventListener("pointerdown", e => {
+      tahnu = true; svg.setPointerCapture(e.pointerId); posun(e);
+    });
+    svg.addEventListener("pointermove", e => { if (tahnu) posun(e); });
+    svg.addEventListener("pointerup", () => { tahnu = false; });
+    svg.addEventListener("pointercancel", () => { tahnu = false; });
+
+    const prepinac = el("div", "vyber-rucicky");
+    [["mala", "malá — hodiny"], ["velka", "velká — minuty"]].forEach(([k, popis]) => {
+      const b = el("button", null, popis);
+      b.setAttribute("aria-pressed", String(k === tahana));
+      b.dataset.rucicka = k;
+      b.onclick = () => {
+        tahana = k;
+        [...prepinac.children].forEach(x =>
+          x.setAttribute("aria-pressed", String(x.dataset.rucicka === k)));
+        klik();
+      };
+      prepinac.appendChild(b);
+    });
+    return { svg, prepinac, cas: () => ({ h, m }) };
+  }
+
+  return { svg, cas: () => ({ h, m }) };
+}
+
+const MINUTY_LEHKE = [0, 15, 30, 45];
+const MINUTY_VSE = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+const HODINY_KOL = 8;
+
+function hodinyCteni() {
+  if (stav.kolo >= HODINY_KOL) {
+    return odmenaDalsi("Hodiny přečteny!",
+      "Malá ručička ukazuje hodiny, velká minuty — a čím dál je malá " +
+      "od čísla, tím víc minut uběhlo.",
+      hvezdyZ(stav.chyb, HODINY_KOL), () => spustDalsi("cteni"));
+  }
+  const h = cele(1, 12);
+  const m = nah(stav.kolo < 3 ? MINUTY_LEHKE : MINUTY_VSE);
+
+  scena.innerHTML = "";
+  const w = el("div", "wrap stred");
+  w.appendChild(tecky(stav.kolo, HODINY_KOL));
+  w.appendChild(ciferník(h, m, false).svg);
+  w.appendChild(el("div", "napoveda", "Kolik je hodin?"));
+
+  /* nabídka: správný čas a dva blízké, ať se musí dívat na obě ručičky */
+  const jine = new Set([DIGI(h, m)]);
+  let p = 0;
+  while (jine.size < 3 && p++ < 60) {
+    const varianta = Math.random() < .5
+      ? DIGI(h % 12 + 1, m)
+      : DIGI(h, nah(MINUTY_VSE));
+    jine.add(varianta);
+  }
+  w.appendChild(volbyCisel(michej([...jine]), DIGI(h, m), () => {
+    stav.kolo++; hodinyCteni();
+  }));
+  scena.appendChild(w);
+}
+
+const NASTAV_KOL = 6;
+
+function hodinyNastav() {
+  if (stav.kolo >= NASTAV_KOL) {
+    return odmenaDalsi("Všechno nastaveno!",
+      "Velkou ručičkou se točí po pěti minutách, malou po hodinách.",
+      hvezdyZ(stav.chyb, NASTAV_KOL), () => spustDalsi("nastav"));
+  }
+  const h = cele(1, 12);
+  const m = nah(stav.kolo < 2 ? MINUTY_LEHKE : MINUTY_VSE);
+  let zH = cele(1, 12), zM = nah(MINUTY_VSE);
+  if (zH === h && zM === m) zH = zH % 12 + 1;
+
+  scena.innerHTML = "";
+  const w = el("div", "wrap stred");
+  w.appendChild(tecky(stav.kolo, NASTAV_KOL));
+  w.appendChild(el("div", "digi", DIGI(h, m) +
+    "<br><small>nastav tenhle čas</small>"));
+  const c = ciferník(zH, zM, true);
+  w.appendChild(c.prepinac);
+  w.appendChild(c.svg);
+  w.appendChild(el("div", "napoveda",
+    "Vyber nahoře ručičku a pak klepni nebo táhni po ciferníku, " +
+    "kam má ukazovat."));
+
+  const t = el("div", "tlacitka");
+  const ok = el("button", "tl hl", "Zkontrolovat");
+  ok.onclick = () => {
+    const x = c.cas();
+    if (x.h === h && x.m === m) {
+      zvukOk();
+      ok.textContent = "Správně!";
+      const s0 = stav;
+      setTimeout(() => { if (stav === s0) { stav.kolo++; hodinyNastav(); } }, 700);
+    } else {
+      zvukNe(); stav.chyb++;
+      c.svg.classList.add("ne");
+      w.querySelector(".napoveda").textContent =
+        x.h !== h ? "Hodiny ještě nesedí — zkus malou ručičku."
+                  : "Hodiny máš dobře, dolaď minuty velkou ručičkou.";
+      setTimeout(() => c.svg.classList.remove("ne"), 450);
+    }
+  };
+  t.appendChild(ok);
+  w.appendChild(t);
+  scena.appendChild(w);
+}
+
+const POSUN_KOL = 6;
+const PRIDAT = [10, 15, 20, 30, 45];
+
+function hodinyPosun() {
+  if (stav.kolo >= POSUN_KOL) {
+    return odmenaDalsi("Počítání s časem ti jde!",
+      "Když minuty přetečou přes šedesát, hodina se posune o jednu dál.",
+      hvezdyZ(stav.chyb, POSUN_KOL), () => spustDalsi("posun"));
+  }
+  const h = cele(1, 12), m = nah(MINUTY_VSE), kolik = nah(PRIDAT);
+  const celkem = m + kolik;
+  const cilM = celkem % 60;
+  const cilH = celkem >= 60 ? (h % 12) + 1 : h;
+
+  scena.innerHTML = "";
+  const w = el("div", "wrap stred");
+  w.appendChild(tecky(stav.kolo, POSUN_KOL));
+  w.appendChild(ciferník(h, m, false).svg);
+  w.appendChild(el("div", "napoveda",
+    `Teď je ${DIGI(h, m)}. Kolik bude za ${kolik} minut?`));
+
+  const spravne = DIGI(cilH, cilM);
+  const jine = new Set([spravne]);
+  let p = 0;
+  while (jine.size < 3 && p++ < 60) {
+    /* nástrahy: zapomenutý přechod přes hodinu a posun o špatný počet */
+    jine.add(Math.random() < .5
+      ? DIGI(h, cilM)
+      : DIGI(cilH, (cilM + nah([5, 10, 55])) % 60));
+  }
+  w.appendChild(volbyCisel(michej([...jine]), spravne, () => {
+    stav.kolo++; hodinyPosun();
+  }));
+  scena.appendChild(w);
 }
 
 /* =====================================================================

@@ -480,6 +480,28 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 .scenka{position:relative;width:100%;aspect-ratio:1.25}
 .scenka svg{position:absolute;width:38%;height:auto}
 
+/* ---------- přidej a uber ---------- */
+.pocty{
+  display:flex;align-items:center;justify-content:center;
+  gap:clamp(8px,2.4vw,20px);flex-wrap:wrap;
+  background:var(--karta);border:3px solid var(--ink);border-radius:20px;
+  box-shadow:0 4px 0 var(--stin);padding:clamp(12px,3vw,20px);
+}
+.pocty .hromadka{display:flex;flex-wrap:wrap;align-items:center;
+                 justify-content:center;gap:clamp(5px,1.4vw,10px);max-width:46%}
+.pocty .hromadka span{display:inline-flex;position:relative}
+.pocty .hromadka svg{width:clamp(30px,5.6vw,56px);height:auto}
+.pocty .znamenko{font-size:clamp(30px,6vw,52px);font-weight:700;color:var(--ink2)}
+/* Odebrané kusy nemizí, jen se škrtnou — je pak vidět, z čeho se ubíralo.
+   Škrt musí být výrazný: slabá čárka splyne s obrázkem a dítě pak počítá
+   i to, co už tam být nemá. */
+.pocty .pryc svg{opacity:.45}   /* vybledne obrázek, ne škrt */
+.pocty .pryc::after{
+  content:"";position:absolute;left:-10%;right:-10%;top:calc(50% - 3px);
+  border-top:6px solid var(--cervena);border-radius:3px;
+  transform:rotate(-20deg);
+}
+
 /* ---------- matice ---------- */
 .matice{display:grid;gap:10px;margin:0 auto;width:100%;max-width:420px}
 .matice > *{
@@ -1063,6 +1085,37 @@ const HRY_ZKOUSKA = [
     }
   },
   {
+    id: "pocty", oblast: "matematika", jm: "Přidej a uber", kat: "počty",
+    ikona: "slunce", barva: "zluta", kol: 8, listy: "11 a 12",
+    zadani: "Spočítej, kolik jich je dohromady — nebo kolik jich zbylo.",
+    uloha(k) {
+      /* Sudá kola přičítají, lichá odčítají. Odebrané kusy zůstanou na
+         obrázku přeškrtnuté: dítě pak vidí, z čeho se ubíralo, a může
+         počítat zbytek, místo aby si celek muselo pamatovat. */
+      const minus = k % 2 === 1;
+      const strop = tezke() ? 10 : 5;
+      const ikona = nah(VSE);
+      let a, b;
+      if (minus) {
+        a = cele(2, strop);
+        b = cele(1, a - 1);
+      } else {
+        a = cele(1, strop - 1);
+        b = cele(1, strop - a);
+      }
+      const spravne = minus ? a - b : a + b;
+      const spatne = new Set();
+      let pojistka = 0;
+      while (spatne.size < 2 && pojistka++ < 60) {
+        const c = spravne + nah([-2, -1, 1, 2]);
+        if (c >= 0 && c <= strop && c !== spravne) spatne.add(c);
+      }
+      while (spatne.size < 2) spatne.add(spravne + spatne.size + 1);
+      return { a, b, minus, ikona, spravne,
+               moznosti: michej([spravne].concat([...spatne])), typ: "pocty" };
+    }
+  },
+  {
     id: "sudoku", oblast: "logika", jm: "Sudoku", kat: "pravidla",
     ikona: "trojuhelnik", barva: "tyrkys", kol: 5, vlastni: true, listy: "",
     zadani: "V každém řádku a v každém sloupci smí být každý tvar jen jednou."
@@ -1173,7 +1226,7 @@ function domu() {
   zk.appendChild(tlZk);
   w.appendChild(zk);
 
-  w.appendChild(dlazdice(HRY_ZKOUSKA, "ctyri"));
+  w.appendChild(dlazdice(HRY_ZKOUSKA));
   scena.appendChild(w);
 }
 
@@ -1361,6 +1414,26 @@ function vykresliUlohu(p, u) {
       stroke-linecap="round"><rect x="10" y="10" width="80" height="80" rx="14"/></svg>`;
     u.rada.forEach((x, i) => { r.innerHTML += i === u.kde ? dira : svgIkona(x, 48); });
     p.appendChild(r);
+  } else if (u.typ === "pocty") {
+    const r = el("div", "pocty");
+    const hromadka = (kolik, odKtere) => {
+      const g = el("div", "hromadka");
+      for (let i = 0; i < kolik; i++) {
+        const sp = el("span", odKtere != null && i >= odKtere ? "pryc" : null);
+        sp.innerHTML = svgIkona(u.ikona, 44);
+        g.appendChild(sp);
+      }
+      return g;
+    };
+    if (u.minus) {
+      r.appendChild(hromadka(u.a, u.a - u.b));
+      r.appendChild(el("div", "znamenko", `− ${u.b}`));
+    } else {
+      r.appendChild(hromadka(u.a));
+      r.appendChild(el("div", "znamenko", "+"));
+      r.appendChild(hromadka(u.b));
+    }
+    p.appendChild(r);
   } else if (u.typ === "matice") {
     const m = el("div", "matice");
     m.style.gridTemplateColumns = `repeat(${u.sloupcu},1fr)`;
@@ -1437,7 +1510,8 @@ function vykresliUlohu(p, u) {
   g.style.gridTemplateColumns = n === 4 ? "repeat(2,1fr)" : "repeat(3,1fr)";
   u.moznosti.forEach(m => {
     const b = el("button", "volba");
-    if (u.typ === "cislo") b.innerHTML = `<span class="cis">${m}</span>`;
+    if (u.typ === "cislo" || u.typ === "pocty")
+      b.innerHTML = `<span class="cis">${m}</span>`;
     else if (u.typ === "matice") b.innerHTML = svgIkona(m.jm, 58, m.b);
     else if (u.typ === "stejny") b.innerHTML = svgIkona(m.jm, 58, null, m.otoc);
     else b.innerHTML = svgIkona(m, 58);

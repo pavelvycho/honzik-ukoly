@@ -3,7 +3,7 @@
   verze projevila sama; bez signálu ji vytáhne z paměti.
   Při změně ikon nebo manifestu zvyš číslo v CACHE.
 */
-const CACHE = "tajne-pismo-v1";
+const CACHE = "klarka-v2";
 const ZAKLAD = ["./", "./index.html", "./manifest.webmanifest",
   "./ikona-192.png", "./ikona-512.png", "./ikona-maskable-512.png"];
 

@@ -1,7 +1,7 @@
 {
-  "name": "Tajné písmo",
-  "short_name": "Šifry",
-  "description": "Luštění šifer — morseovka, čísla, posun v abecedě a zrcadlové písmo.",
+  "name": "Klárčiny úkoly",
+  "short_name": "Klárka",
+  "description": "Šifry, násobilka a hodiny pro druhačku.",
   "lang": "cs",
   "dir": "ltr",
   "start_url": ".",
