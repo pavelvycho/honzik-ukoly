@@ -1,7 +1,7 @@
-# Honzíkovy úkoly
+# Úkoly pro Honzíka a Klárku
 
-Devět úkolů pro předškoláka na myšlení, pozornost a uvolnění ruky.
-Celá appka je jeden soubor `index.html` — žádné knihovny, žádné sestavování.
+Tři appky pro dvě děti. Každá je jeden soubor `index.html` — žádné knihovny,
+žádné sestavování, po prvním otevření fungují i bez internetu.
 
 ## Zveřejnění přes GitHub Desktop
 
@@ -32,6 +32,17 @@ tehdy, když není signál).
 
 Když bys měnil i ikony nebo `manifest.webmanifest`, zvyš v `sw.js` číslo
 v `const CACHE = "honzik-ukoly-v1"` na `v2` — jinak si tablet nechá ty staré.
+
+## Tři appky v jednom repozitáři
+
+Každá má vlastní podsložku, a tím i vlastní rozsah service workeru — na
+plochu se tedy instalují jako tři samostatné ikony.
+
+| Adresa | Co to je | Pro koho |
+| --- | --- | --- |
+| `/` | **Honzíkovy úkoly** — 19 her, Velká cesta, Cvičení soustředění a Zkouška nanečisto | předškolák |
+| `/sifry/` | **Klárčiny úkoly** — šifry, násobilka a hodiny | 2. třída |
+| `/parkety/` | **Parkety** — pokryj podlahu co nejmenším počtem parket | od 2. třídy, i do školy |
 
 ## Co je ve složce
 
