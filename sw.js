@@ -8,7 +8,7 @@
   Ikony a manifest bere rovnou z paměti, ty se nemění.
 */
 
-const CACHE = "honzik-ukoly-v1";
+const CACHE = "honzik-ukoly-v2";
 
 const ZAKLAD = [
   "./",
