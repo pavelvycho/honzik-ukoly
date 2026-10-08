@@ -83,7 +83,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   background:var(--karta);border:2.5px solid var(--ink);border-radius:18px;
   box-shadow:0 4px 0 var(--stin);padding:12px 16px;
 }
-.zadani .txt{flex:1;min-width:190px;font-size:15px;line-height:1.4}
+.zadani .txt{flex:1;min-width:170px;font-size:15px;line-height:1.4}
 .zadani .txt b{display:block;font-size:17px;margin-bottom:2px}
 .volic{
   display:inline-flex;border:2.5px solid var(--ink);border-radius:999px;
@@ -92,13 +92,59 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .volic button{padding:9px 17px;font-size:15px;font-weight:700;color:var(--ink2)}
 .volic button[aria-pressed="true"]{background:var(--ink);color:var(--papir)}
 
+/* ---------- panel „Změnit" ---------- */
+.panel{
+  background:var(--karta);border:2.5px solid var(--ink);border-radius:18px;
+  box-shadow:0 4px 0 var(--stin);padding:12px 14px;
+  display:flex;flex-direction:column;gap:11px;
+}
+.rada{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.rada .lab{
+  flex:0 0 auto;width:62px;font-size:11.5px;font-weight:700;color:var(--ink2);
+  text-transform:uppercase;letter-spacing:.06em;line-height:1.2;
+}
+.cip{
+  border:2.5px solid var(--linka);border-radius:999px;padding:7px 13px;
+  font-size:14px;font-weight:600;background:var(--karta);
+}
+.cip[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);
+  color:var(--papir)}
+.cipT{
+  display:flex;align-items:center;gap:7px;
+  border:2.5px solid var(--linka);border-radius:14px;padding:6px 9px;
+  background:var(--karta);font-size:12.5px;font-weight:600;
+}
+.cipT[aria-pressed="true"]{border-color:var(--ink);
+  background:color-mix(in srgb,var(--zluta) 22%,var(--karta))}
+.cipT:disabled{opacity:.36}
+.krok{
+  display:inline-flex;align-items:center;gap:2px;
+  border:2.5px solid var(--ink);border-radius:999px;
+  box-shadow:0 3px 0 var(--stin);overflow:hidden;
+}
+.krok button{width:38px;height:38px;font-size:19px;font-weight:700;color:var(--ink2)}
+.krok button:disabled{opacity:.3}
+.krok b{min-width:26px;text-align:center;font-size:16px;
+        font-variant-numeric:tabular-nums}
+.krizek{font-size:15px;font-weight:700;color:var(--ink2);padding:0 2px}
+.rozmery{display:flex;align-items:center;gap:6px;flex:0 0 auto}
+.pozn{font-size:12px;color:var(--ink2);line-height:1.45}
+/* Na telefonu by panel s třinácti popsanými čipy vytlačil podlahu mimo
+   obrazovku. Tvar je to podstatné, jméno ne — na úzkém displeji tedy
+   zůstanou jen tvary. */
+@media (max-width:430px){
+  .rada .lab{width:100%}
+  .cip{padding:6px 11px;font-size:13px}
+  .cipT{padding:7px 8px}
+  .cipT span{display:none}
+}
+
 /* ---------- podlaha ---------- */
 .podlaha-box{display:flex;justify-content:center}
 .podlaha{
   display:grid;gap:0;touch-action:none;
   border:3px solid var(--ink);border-radius:6px;overflow:hidden;
   box-shadow:0 5px 0 var(--stin);background:var(--karta);
-  width:min(100%,420px);
 }
 .podlaha .bunka{
   aspect-ratio:1;position:relative;
@@ -106,16 +152,27 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   background:var(--karta);
 }
 .podlaha .bunka.dira{background:transparent;border-color:transparent}
-/* obrysy položené parkety: hranu dostane jen strana, za kterou už parketa není */
-.podlaha .bunka.plna{border-color:color-mix(in srgb,var(--kus) 55%,var(--karta))}
-.podlaha .bunka.plna{background:color-mix(in srgb,var(--kus) 55%,var(--karta))}
-.podlaha .bunka.h-t{border-top:3px solid var(--kus)}
-.podlaha .bunka.h-r{border-right:3px solid var(--kus)}
-.podlaha .bunka.h-b{border-bottom:3px solid var(--kus)}
-.podlaha .bunka.h-l{border-left:3px solid var(--kus)}
+/* Obrysy položené parkety: hranu dostane jen strana, za kterou už parketa
+   není. Obrys je schválně ztmavený inkoustem, ne jen sytější odstín
+   výplně — na velké podlaze leží vedle sebe parkety stejného tvaru, a
+   tedy stejné barvy, a bez tmavé hrany by splynuly v jednu placku. */
+.podlaha .bunka.plna{
+  --obrys:color-mix(in srgb,var(--kus) 55%,var(--ink));
+  background:color-mix(in srgb,var(--kus) 48%,var(--karta));
+  border-color:color-mix(in srgb,var(--kus) 48%,var(--karta));
+}
+.podlaha .bunka.h-t{border-top:3px solid var(--obrys)}
+.podlaha .bunka.h-r{border-right:3px solid var(--obrys)}
+.podlaha .bunka.h-b{border-bottom:3px solid var(--obrys)}
+.podlaha .bunka.h-l{border-left:3px solid var(--obrys)}
 .podlaha .bunka.duch{background:color-mix(in srgb,var(--kus) 26%,var(--karta));
                      border-color:color-mix(in srgb,var(--kus) 45%,var(--karta))}
 .podlaha .bunka.spatne{background:color-mix(in srgb,var(--cervena) 26%,var(--karta))}
+
+/* ---------- náhledy tvarů ---------- */
+.nahled{display:grid;gap:2px}
+.nahled i{display:block;width:11px;aspect-ratio:1;border-radius:2px}
+.nahled i.je{background:var(--kus);outline:1px solid var(--ink)}
 
 /* ---------- paleta parket ---------- */
 .paleta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
@@ -130,11 +187,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   background:color-mix(in srgb,var(--zluta) 26%,var(--karta));
   box-shadow:0 4px 0 var(--stin),inset 0 0 0 4px var(--ink);
 }
-.parketa-t .nahled{display:grid;gap:2px}
-.parketa-t .nahled i{
-  display:block;width:clamp(13px,3vw,20px);aspect-ratio:1;border-radius:2px;
-}
-.parketa-t .nahled i.je{background:var(--kus);outline:1px solid var(--ink)}
+.parketa-t .nahled i{width:clamp(11px,2.6vw,18px)}
 .parketa-t small{font-size:11px;font-weight:600;color:var(--ink2)}
 
 /* ---------- stav a tlačítka ---------- */
@@ -147,15 +200,12 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   background:var(--karta);
 }
 .stav span b{font-variant-numeric:tabular-nums;font-size:16px}
-.stav span.hotovo{border-color:var(--zelena);
-  background:color-mix(in srgb,var(--zelena) 16%,var(--karta))}
-.stav span.chyba{border-color:var(--cervena);
-  background:color-mix(in srgb,var(--cervena) 14%,var(--karta))}
 
 .tlacitka{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
 .tl{border:3px solid var(--ink);border-radius:16px;box-shadow:0 4px 0 var(--stin);
     padding:12px 20px;font-weight:700;font-size:15px;background:var(--karta)}
 .tl:active{transform:translateY(4px);box-shadow:0 0 0 var(--stin)}
+.tl.maly{padding:9px 15px;font-size:14px;border-width:2.5px}
 .tl.hl{background:var(--ink);color:var(--papir)}
 
 .hlaska{
@@ -165,6 +215,8 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 }
 .hlaska.skoro{border-color:var(--zluta);
   background:color-mix(in srgb,var(--zluta) 15%,var(--karta))}
+.hlaska.stop{border-color:var(--cervena);
+  background:color-mix(in srgb,var(--cervena) 12%,var(--karta))}
 .napoveda{font-size:12.5px;color:var(--ink2);text-align:center;line-height:1.5}
 
 @keyframes klepani{0%,100%{transform:translateX(0)}
@@ -189,9 +241,16 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
    Parkety — pokryj podlahu co nejmenším počtem parket.
    Jeden soubor, žádné knihovny, funguje i offline.
 
-   Úrovně jsou data (viz UROVNE). Minimální počet parket se nikde
-   nezadává — appka si ho pro každé zadání spočítá sama, takže nová
-   podlaha nebo nová sada parket nepotřebuje ruční klíč k řešení.
+   Podlahu i sadu parket si hráč vybírá sám. Minimální počet parket se
+   nikde nezadává — appka si ho pro každou kombinaci spočítá, takže nová
+   podlaha nepotřebuje ruční klíč k řešení.
+
+   Co appka schválně NEDĚLÁ: nehlásí dopředu, že vybranou podlahu z
+   vybraných parket pokrýt nejde. Spousta kombinací je neřešitelná a
+   není to chyba, ale zjištění — él sám nevydláždí 3 × 3, i když je
+   devět dělitelné třema; eska nevydláždí žádný obdélník. Na to se má
+   přijít pokusem, ne přečtením varování. Appka se ozve teprve ve chvíli,
+   kdy se už opravdu nikam nic nevejde.
    ===================================================================== */
 
 const $ = s => document.querySelector(s);
@@ -219,25 +278,87 @@ const klik = () => ton(700, .05, 0, .07);
 const zvukPolozit = () => ton(560, .09);
 const zvukNe = () => ton(196, .18, 0, .12);
 const zvukHotovo = () => [523, 659, 784, 1046].forEach((f, i) => ton(f, .26, i * .1));
+const zvukSlepa = () => [392, 330, 262].forEach((f, i) => ton(f, .22, i * .12, .13));
 
 /* =====================================================================
-   Data úrovní
-   Parketa se zadává políčky [sloupec, řádek] v libovolném posunutí —
-   normalizuje se sama. Podlaha může být i děravá: v mřížce je '#'
-   podlaha a '.' díra. Když se mřížka neuvede, udělá se plný obdélník.
+   Knihovna parket
+   Tvar se zadává políčky [sloupec, řádek] v libovolném posunutí —
+   normalizuje se sám. Parketa se jen otáčí, nepřeklápí: skutečná
+   parketa má lícovou stranu. Proto jsou eska a zetko dva různé tvary
+   a stejně tak velké él a velké jé.
    ===================================================================== */
-const UROVNE = [
-  {
-    id: "4x3",
-    jm: "Podlaha 4 × 3",
+const KNIHOVNA = [
+  { id: "jedna",   jm: "jednička",  barva: "zelena",
+    bunky: [[0, 0]] },
+  { id: "dva",     jm: "dvojka",    barva: "oranzova",
+    bunky: [[0, 0], [1, 0]] },
+  { id: "tri",     jm: "trojka",    barva: "cervena",
+    bunky: [[0, 0], [1, 0], [2, 0]] },
+  { id: "el",      jm: "él",        barva: "modra",
+    bunky: [[0, 0], [0, 1], [1, 1]] },
+  { id: "ctyri",   jm: "čtyřka",    barva: "fialova",
+    bunky: [[0, 0], [1, 0], [2, 0], [3, 0]] },
+  { id: "kostka",  jm: "kostka",    barva: "tyrkys",
+    bunky: [[0, 0], [1, 0], [0, 1], [1, 1]] },
+  { id: "te",      jm: "téčko",     barva: "ruzova",
+    bunky: [[0, 0], [1, 0], [2, 0], [1, 1]] },
+  { id: "es",      jm: "eska",      barva: "hneda",
+    bunky: [[1, 0], [2, 0], [0, 1], [1, 1]] },
+  { id: "zet",     jm: "zetko",     barva: "zluta",
+    bunky: [[0, 0], [1, 0], [1, 1], [2, 1]] },
+  { id: "velkeEl", jm: "velké él",  barva: "seda",
+    bunky: [[0, 0], [0, 1], [0, 2], [1, 2]] },
+  { id: "velkeJe", jm: "velké jé",  barva: "modra",
+    bunky: [[1, 0], [1, 1], [1, 2], [0, 2]] },
+  { id: "pet",     jm: "pětka",     barva: "cervena",
+    bunky: [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0]] },
+  { id: "krizek",  jm: "křížek",    barva: "zelena",
+    bunky: [[1, 0], [0, 1], [1, 1], [2, 1], [1, 2]] },
+];
+
+/* Barev je deset, tvarů třináct — v zásobníku ale smí být nejvýš pět,
+   takže kolizi stačí rozhodnout při stavbě úrovně. */
+const BARVY = ["zelena", "oranzova", "cervena", "modra", "fialova",
+               "tyrkys", "ruzova", "hneda", "zluta", "seda"];
+function rozlisBarvy(tvary) {
+  const vzate = new Set();
+  return tvary.map(t => {
+    let b = t.barva;
+    if (vzate.has(b)) b = BARVY.find(x => !vzate.has(x)) || b;
+    vzate.add(b);
+    return { ...t, barva: b };
+  });
+}
+
+const MAX_TVARU = 5;       /* víc tvarů úlohu rozmělní, neztíží */
+const MAX_POLICEK = 36;    /* nad tím už je hledání minima na tabletu dlouhé */
+const MIN_STRANA = 2, MAX_STRANA = 6;
+
+/* =====================================================================
+   Hotové úlohy
+   První je ta z učebnice — jediná, kde se hlídá počet použitých typů.
+   Ostatní mají jediné pravidlo: co nejmíň parket.
+   ===================================================================== */
+const ULOHY = [
+  { id: "ucebnice", cip: "Z učebnice", jm: "Z učebnice — 4 × 3",
     sloupcu: 4, radku: 3,
-    parkety: [
-      { id: "jedna", jm: "jednička", barva: "zelena",   bunky: [[0, 0]] },
-      { id: "dva",   jm: "dvojka",   barva: "oranzova", bunky: [[0, 0], [1, 0]] },
-      { id: "tri",   jm: "trojka",   barva: "cervena",  bunky: [[0, 0], [1, 0], [2, 0]] },
-      { id: "el",    jm: "él",       barva: "modra",    bunky: [[0, 0], [0, 1], [1, 1]] },
-    ],
-  },
+    tvary: ["jedna", "dva", "tri", "el"], typy: true },
+  { id: "trojky",   cip: "Samé trojky", jm: "Samé trojky — 6 × 3",
+    sloupcu: 6, radku: 3,
+    tvary: ["tri", "el"] },
+  { id: "tecka",    cip: "Samá téčka",  jm: "Samá téčka — 4 × 4",
+    sloupcu: 4, radku: 4,
+    tvary: ["te"] },
+  { id: "ctverec",  cip: "Čtverec",     jm: "Čtverec — 5 × 5",
+    sloupcu: 5, radku: 5,
+    tvary: ["dva", "tri", "el", "kostka"] },
+  /* Šest krát šest je šestatřicet políček a každá z těchhle parket má
+     čtyři — vyjít to tedy musí přesně na devět kusů, bez jediného
+     místa navíc. A protože žádná z nich sama o sobě podlahu 6 × 6
+     nevydláždí, musí se tvary míchat. */
+  { id: "velka",    cip: "Samé čtyřky", jm: "Samé čtyřky — 6 × 6",
+    sloupcu: 6, radku: 6,
+    tvary: ["ctyri", "te", "velkeEl", "velkeJe", "es"] },
 ];
 
 const ZADANI = [
@@ -247,6 +368,10 @@ const ZADANI = [
     popis: "Použij přesně dva různé tvary — ani víc, ani míň.", typu: 2 },
   { id: "c", pismeno: "c", nadpis: "Všechny typy parket",
     popis: "Každý tvar musí být na podlaze aspoň jednou.", typu: "vse" },
+];
+const VOLNE = [
+  { id: "volne", pismeno: "", nadpis: null,
+    popis: "Pokryj ji co nejmenším počtem parket.", typu: null },
 ];
 
 /* =====================================================================
@@ -265,7 +390,7 @@ const otoc = bunky => {
   return normalizuj(bunky.map(([x, y]) => [my - y, x]));
 };
 
-/* Všechna různá otočení tvaru. Čtverec má jen jedno, él čtyři. */
+/* Všechna různá otočení tvaru. Kostka má jen jedno, él čtyři. */
 function orientace(bunky) {
   const out = [];
   const videno = new Set();
@@ -279,23 +404,27 @@ function orientace(bunky) {
 }
 
 /* =====================================================================
-   Řešitel
-   Prohledávání s návratem přes bitovou masku obsazených políček.
-   Vždycky se obsazuje první volné políčko, takže se stejné rozložení
-   nezkouší v různém pořadí — bez toho by i dvanáct políček trvalo dlouho.
+   Stavba úrovně
+   Masky jsou BigInt — podlaha 6 × 6 má 36 políček a do běžného čísla
+   se bitově vejde jen 31.
    ===================================================================== */
-function pripravUroven(u) {
-  const sl = u.sloupcu, ra = u.radku;
-  const mrizka = u.mrizka || Array.from({ length: ra }, () => "#".repeat(sl));
+function pripravUroven(n) {
+  const sl = n.sloupcu, ra = n.radku;
+  const mrizka = n.mrizka || Array.from({ length: ra }, () => "#".repeat(sl));
   const index = [];          /* [řádek][sloupec] → pořadí bitu, nebo -1 */
-  let n = 0;
+  let policek = 0;
   for (let r = 0; r < ra; r++) {
     index.push([]);
     for (let c = 0; c < sl; c++) {
-      index[r].push(mrizka[r][c] === "#" ? n++ : -1);
+      index[r].push(mrizka[r][c] === "#" ? policek++ : -1);
     }
   }
-  const tvary = u.parkety.map(p => ({ ...p, orientace: orientace(p.bunky) }));
+  const vybrane = n.tvary
+    .map(id => KNIHOVNA.find(t => t.id === id))
+    .filter(Boolean)
+    .slice(0, MAX_TVARU);
+  const tvary = rozlisBarvy(vybrane)
+    .map(p => ({ ...p, orientace: orientace(p.bunky) }));
 
   /* všechna možná položení: maska políček + který typ parkety to je */
   const polozeni = [];
@@ -305,12 +434,12 @@ function pripravUroven(u) {
       const vyska = Math.max(...o.map(b => b[1])) + 1;
       for (let r = 0; r + vyska <= ra; r++) {
         for (let c = 0; c + sirka <= sl; c++) {
-          let maska = 0, ok = true;
+          let maska = 0n, ok = true;
           const bunky = [];
           for (const [x, y] of o) {
             const i = index[r + y][c + x];
             if (i < 0) { ok = false; break; }
-            maska |= 1 << i;
+            maska |= 1n << BigInt(i);
             bunky.push([c + x, r + y]);
           }
           if (ok) polozeni.push({ maska, typ: ti, orient: oi, r, c, bunky });
@@ -320,60 +449,111 @@ function pripravUroven(u) {
   });
 
   /* pro každé políčko seznam položení, která ho zakrývají */
-  const podle = Array.from({ length: n }, () => []);
+  const podle = Array.from({ length: policek }, () => []);
   polozeni.forEach(p => {
-    for (let i = 0; i < n; i++) if (p.maska & (1 << i)) podle[i].push(p);
+    for (let i = 0; i < policek; i++)
+      if (p.maska & (1n << BigInt(i))) podle[i].push(p);
   });
 
-  return { ...u, mrizka, index, tvary, polozeni, podle, policek: n,
-           plnaMaska: n >= 31 ? -1 : (1 << n) - 1 };
+  const jm = n.jm || `Podlaha ${sl} × ${ra}`;
+  return { ...n, jm, mrizka, index, tvary, polozeni, podle, policek,
+           plnaMaska: (1n << BigInt(policek)) - 1n,
+           hlidatTypy: !!n.typy };
 }
 
 const kolikBitu = x => { let n = 0; while (x) { x &= x - 1; n++; } return n; };
 
-/* Nejmenší počet parket pro dané zadání. Vrací { pocet, reseni } nebo null. */
+/* =====================================================================
+   Řešitel
+   Vždycky se obsazuje první volné políčko, takže se stejné rozložení
+   nezkouší v různém pořadí. Když zadání neomezuje počet typů parket,
+   stačí si pamatovat masku — a to je ten rychlý případ: podlaha 6 × 6
+   s pěti tvary je hotová za pár desetin tisícin sekundy. Jakmile se
+   hlídá počet typů, musí být součástí stavu i použité typy a hledání
+   zdraží; proto se počet typů hlídá jen u malé učebnicové podlahy.
+
+   Řešení se neukládá do memoizace (to by u 6 × 6 snědlo paměť) — vyčte
+   se z ní zpětně, krok po kroku.
+   ===================================================================== */
 function najdiMinimum(U, zadani) {
-  if (U.policek > 30) return null;          /* na tohle je ten postup krátký */
+  if (!U.policek || U.policek > MAX_POLICEK || !U.tvary.length) return null;
   const cil = U.plnaMaska;
-  const potreba = zadani.typu === "vse" ? U.tvary.length : zadani.typu;
+  const potreba = zadani.typu === "vse" ? U.tvary.length
+                : zadani.typu == null ? null : zadani.typu;
   const memo = new Map();
+  const klic = potreba === null
+    ? (m) => m.toString(36)
+    : (m, t) => m.toString(36) + "/" + t;
 
   function hledej(maska, typy) {
-    if (maska === cil) {
-      return kolikBitu(typy) === potreba ? { pocet: 0, kroky: [] } : null;
-    }
-    /* víc typů, než zadání dovoluje, už nejde vzít zpátky */
-    if (kolikBitu(typy) > potreba) return null;
-    const klic = maska * 64 + typy;
-    if (memo.has(klic)) return memo.get(klic);
+    if (maska === cil)
+      return potreba === null || kolikBitu(typy) === potreba ? 0 : Infinity;
+    if (potreba !== null && kolikBitu(typy) > potreba) return Infinity;
+    const k = klic(maska, typy);
+    if (memo.has(k)) return memo.get(k);
 
     let prvni = 0;
-    while (maska & (1 << prvni)) prvni++;
+    while (maska & (1n << BigInt(prvni))) prvni++;
 
-    let nej = null;
+    let nej = Infinity;
     for (const p of U.podle[prvni]) {
       if (p.maska & maska) continue;
-      const d = hledej(maska | p.maska, typy | (1 << p.typ));
-      if (d && (!nej || d.pocet + 1 < nej.pocet)) {
-        nej = { pocet: d.pocet + 1, kroky: [p].concat(d.kroky) };
-      }
+      const d = hledej(maska | p.maska, typy | (1 << p.typ)) + 1;
+      if (d < nej) nej = d;
     }
-    memo.set(klic, nej);
+    memo.set(k, nej);
     return nej;
   }
-  return hledej(0, 0);
+
+  const pocet = hledej(0n, 0);
+  if (!isFinite(pocet)) return null;
+
+  /* zpětné vyčtení jednoho z nejkratších řešení */
+  const kroky = [];
+  let maska = 0n, typy = 0, zbyva = pocet;
+  while (maska !== cil) {
+    let prvni = 0;
+    while (maska & (1n << BigInt(prvni))) prvni++;
+    const dalsi = U.podle[prvni].find(p => !(p.maska & maska) &&
+      hledej(maska | p.maska, typy | (1 << p.typ)) === zbyva - 1);
+    if (!dalsi) return { pocet, kroky: null };
+    kroky.push(dalsi);
+    maska |= dalsi.maska;
+    typy |= 1 << dalsi.typ;
+    zbyva--;
+  }
+  return { pocet, kroky };
 }
+
+/* =====================================================================
+   Nastavení, které se pamatuje mezi spuštěními
+   ===================================================================== */
+const KLIC = "parkety-nastaveni";
+let nast = { uloha: "ucebnice", sloupcu: 4, radku: 3, ctverec: false,
+             tvary: ["jedna", "dva", "tri", "el"] };
+try {
+  const ulozene = JSON.parse(localStorage.getItem(KLIC) || "null");
+  if (ulozene && Array.isArray(ulozene.tvary) && ulozene.tvary.length)
+    nast = { ...nast, ...ulozene };
+} catch (e) {}
+const uloz = () => { try { localStorage.setItem(KLIC, JSON.stringify(nast)); }
+                     catch (e) {} };
 
 /* =====================================================================
    Stav hry
    ===================================================================== */
 let U = null;              /* připravená úroveň */
-let zadani = ZADANI[0];
+let seznamZadani = VOLNE;
+let zadani = VOLNE[0];
 let polozene = [];         /* [{ typ, orient, r, c, bunky }] */
 let vybrany = 0;           /* index typu parkety v paletě */
 let otoceni = 0;           /* index orientace vybrané parkety */
 let duch = null;           /* náhled pod prstem: { bunky, jde } */
-let minima = {};           /* id zadání → { pocet, kroky } */
+let minima = {};           /* id zadání → { pocet, kroky } nebo null */
+let panelOtevren = false;
+/* null = appka mlčí; "slepa" = hráč se zasekl; "nejde" = hráč si o řešení
+   řekl a žádné neexistuje. Dopředu se nehlásí ani jedno. */
+let hlasit = null;
 
 const scena = $("#scena");
 const obsazenost = () => {
@@ -382,18 +562,44 @@ const obsazenost = () => {
   return m;
 };
 
-function zacni(uroven) {
-  U = pripravUroven(uroven);
+function zacni() {
+  const u = ULOHY.find(x => x.id === nast.uloha);
+  U = pripravUroven(u
+    ? { ...u }
+    : { sloupcu: nast.sloupcu, radku: nast.radku, tvary: nast.tvary });
+  seznamZadani = U.hlidatTypy ? ZADANI : VOLNE;
   minima = {};
-  ZADANI.forEach(z => { minima[z.id] = najdiMinimum(U, z); });
-  vyberZadani(ZADANI[0]);
+  seznamZadani.forEach(z => { minima[z.id] = najdiMinimum(U, z); });
+  vyberZadani(seznamZadani[0]);
 }
 
 function vyberZadani(z) {
   zadani = z;
   polozene = [];
-  vybrany = 0; otoceni = 0; duch = null;
+  vybrany = 0; otoceni = 0; duch = null; hlasit = null;
   vykresli();
+}
+
+/* Ruční změna v panelu znamená „vlastní úloha". Když se zrovna hrála
+   hotová úloha, vezmou se její rozměry a sada jako výchozí stav —
+   jinak by se krok o jedno políčko počítal z něčeho jiného, než co
+   má hráč před sebou. */
+function zmen(upravy) {
+  const u = ULOHY.find(x => x.id === nast.uloha);
+  const zaklad = u
+    ? { ...nast, sloupcu: u.sloupcu, radku: u.radku, tvary: u.tvary.slice() }
+    : nast;
+  const novy = { ...zaklad, ...upravy, uloha: null };
+  /* u čtverce dotáhni druhou stranu, ale jen když se měnila jedna */
+  if (novy.ctverec) {
+    if (upravy.sloupcu !== undefined && upravy.radku === undefined)
+      novy.radku = novy.sloupcu;
+    else if (upravy.radku !== undefined && upravy.sloupcu === undefined)
+      novy.sloupcu = novy.radku;
+  }
+  nast = novy;
+  uloz();
+  zacni();
 }
 
 /* =====================================================================
@@ -404,25 +610,38 @@ function vykresli() {
   scena.innerHTML = "";
   const w = el("div", "wrap");
 
-  /* ---- zadání ---- */
+  /* ---- hlavička se zadáním ---- */
   const z = el("div", "zadani");
-  z.innerHTML = `<span class="txt"><b>${zadani.nadpis}</b>${zadani.popis}</span>`;
-  const volic = el("div", "volic");
-  ZADANI.forEach(x => {
-    const b = el("button", null, x.pismeno);
-    b.setAttribute("aria-pressed", String(x.id === zadani.id));
-    b.dataset.zadani = x.id;
-    b.onclick = () => { klik(); vyberZadani(x); };
-    volic.appendChild(b);
-  });
-  z.appendChild(volic);
+  z.innerHTML = `<span class="txt"><b>${zadani.nadpis || U.jm}</b>` +
+                `${zadani.popis}</span>`;
+  if (U.hlidatTypy) {
+    const volic = el("div", "volic");
+    ZADANI.forEach(x => {
+      const b = el("button", null, x.pismeno);
+      b.setAttribute("aria-pressed", String(x.id === zadani.id));
+      b.dataset.zadani = x.id;
+      b.onclick = () => { klik(); vyberZadani(x); };
+      volic.appendChild(b);
+    });
+    z.appendChild(volic);
+  }
+  const prep = el("button", "tl maly", panelOtevren ? "Zavřít" : "Změnit");
+  prep.id = "prepinac";
+  prep.setAttribute("aria-expanded", String(panelOtevren));
+  prep.onclick = () => { panelOtevren = !panelOtevren; klik(); vykresli(); };
+  z.appendChild(prep);
   w.appendChild(z);
+
+  if (panelOtevren) w.appendChild(panel());
 
   /* ---- podlaha ---- */
   const box = el("div", "podlaha-box");
   const g = el("div", "podlaha");
   g.id = "podlaha";
   g.style.gridTemplateColumns = `repeat(${U.sloupcu},1fr)`;
+  /* čtvereček má pevný strop, aby velká podlaha nebyla z drobků a malá
+     nebyla přes celou obrazovku */
+  g.style.width = `min(100%,${U.sloupcu * 68}px)`;
   const kde = obsazenost();
   const duchovy = new Set((duch ? duch.bunky : []).map(([c, r]) => r + ":" + c));
 
@@ -462,8 +681,10 @@ function vykresli() {
     b.style.setProperty("--kus", `var(--b-${p.barva})`);
     const o = p.orientace[i === vybrany ? otoceni % p.orientace.length : 0];
     b.appendChild(nahled(o));
-    b.appendChild(el("small", null, i === vybrany && p.orientace.length > 1
-      ? "klepni = otoč" : p.jm));
+    /* jméno zůstává vždycky — u jednoprvkového zásobníku by jinak nebylo
+       vidět nikdy; otáčení připomíná šipka u vybrané parkety */
+    b.appendChild(el("small", null, p.jm +
+      (i === vybrany && p.orientace.length > 1 ? " ↻" : "")));
     b.onclick = () => {
       if (i === vybrany) otoceni = (otoceni + 1) % p.orientace.length;
       else { vybrany = i; otoceni = 0; }
@@ -480,32 +701,32 @@ function vykresli() {
   const stav = el("div", "stav");
   stav.innerHTML =
     `<span>parket: <b>${polozene.length}</b></span>` +
-    `<span>typů: <b>${typyPouzite}</b></span>` +
+    (U.hlidatTypy ? `<span>typů: <b>${typyPouzite}</b></span>` : "") +
     `<span>pokryto: <b>${pokryto}</b> z ${U.policek}</span>` +
     (min ? `<span>nejmíň to jde za <b>${min.pocet}</b></span>` : "");
   w.appendChild(stav);
 
-  /* ---- hláška po dokončení ---- */
+  /* ---- hláška ---- */
   const h = vyhodnot(pokryto, typyPouzite, min);
-  if (h) {
-    const e = el("div", "hlaska" + (h.hotovo ? "" : " skoro"), h.text);
-    w.appendChild(e);
-  }
+  if (h) w.appendChild(el("div", "hlaska " + (h.trida || ""), h.text));
 
   /* ---- tlačítka ---- */
   const t = el("div", "tlacitka");
   const vyc = el("button", "tl", "Vyklidit podlahu");
-  vyc.onclick = () => { polozene = []; klik(); vykresli(); };
+  vyc.onclick = () => { polozene = []; hlasit = null; klik(); vykresli(); };
   t.appendChild(vyc);
-  if (min) {
-    const res = el("button", "tl", "Ukázat řešení");
-    res.onclick = () => {
-      polozene = min.kroky.map(p => ({ typ: p.typ, orient: p.orient,
-                                       r: p.r, c: p.c, bunky: p.bunky }));
-      zvukHotovo(); vykresli();
-    };
-    t.appendChild(res);
-  }
+  /* Tlačítko je tu vždycky — kdyby chybělo, prozradilo by to dopředu,
+     že řešení neexistuje. */
+  const res = el("button", "tl", "Ukázat řešení");
+  res.onclick = () => {
+    if (!min || !min.kroky) {
+      polozene = []; hlasit = "nejde"; zvukSlepa(); vykresli(); return;
+    }
+    polozene = min.kroky.map(p => ({ typ: p.typ, orient: p.orient,
+                                     r: p.r, c: p.c, bunky: p.bunky }));
+    hlasit = null; zvukHotovo(); vykresli();
+  };
+  t.appendChild(res);
   w.appendChild(t);
 
   w.appendChild(el("div", "napoveda",
@@ -513,6 +734,85 @@ function vykresli() {
     "po podlaze. Položenou parketu sundáš klepnutím na ni."));
 
   scena.appendChild(w);
+}
+
+/* ---------- panel „Změnit" ---------- */
+function panel() {
+  const p = el("div", "panel");
+
+  const r1 = el("div", "rada");
+  r1.appendChild(el("span", "lab", "Úlohy"));
+  ULOHY.forEach(u => {
+    const b = el("button", "cip", u.cip);
+    b.dataset.uloha = u.id;
+    b.setAttribute("aria-pressed", String(nast.uloha === u.id));
+    b.onclick = () => { klik(); nast = { ...nast, uloha: u.id }; uloz(); zacni(); };
+    r1.appendChild(b);
+  });
+  p.appendChild(r1);
+
+  const r2 = el("div", "rada");
+  r2.appendChild(el("span", "lab", "Podlaha"));
+  const roz = el("div", "rozmery");
+  roz.appendChild(krokovac("sloupcu", U.sloupcu));
+  roz.appendChild(el("span", "krizek", "×"));
+  roz.appendChild(krokovac("radku", U.radku));
+  r2.appendChild(roz);
+  const ctv = el("button", "cip", "čtverec");
+  ctv.id = "ctverec";
+  ctv.setAttribute("aria-pressed", String(!!nast.ctverec));
+  ctv.onclick = () => {
+    klik();
+    const zap = !nast.ctverec;
+    nast = { ...nast, ctverec: zap };
+    if (zap) zmen({ sloupcu: U.sloupcu, radku: U.sloupcu });
+    else { uloz(); vykresli(); }
+  };
+  r2.appendChild(ctv);
+  p.appendChild(r2);
+
+  const r3 = el("div", "rada");
+  r3.appendChild(el("span", "lab", "Parkety"));
+  const vybrane = U.tvary.map(t => t.id);
+  KNIHOVNA.forEach(t => {
+    const je = vybrane.includes(t.id);
+    const b = el("button", "cipT");
+    b.dataset.tvar = t.id;
+    b.setAttribute("aria-pressed", String(je));
+    b.style.setProperty("--kus", `var(--b-${t.barva})`);
+    b.appendChild(nahled(normalizuj(t.bunky)));
+    b.appendChild(el("span", null, t.jm));
+    b.disabled = !je && vybrane.length >= MAX_TVARU;
+    b.onclick = () => {
+      klik();
+      const nove = je ? vybrane.filter(x => x !== t.id) : vybrane.concat(t.id);
+      if (!nove.length) return;              /* aspoň jeden tvar musí zůstat */
+      zmen({ tvary: nove, sloupcu: U.sloupcu, radku: U.radku });
+    };
+    r3.appendChild(b);
+  });
+  p.appendChild(r3);
+
+  p.appendChild(el("div", "pozn",
+    `Vybráno ${vybrane.length} z ${MAX_TVARU} tvarů. Podlaha smí mít ` +
+    `strany od ${MIN_STRANA} do ${MAX_STRANA} políček.`));
+  return p;
+}
+
+function krokovac(co, hodnota) {
+  const k = el("div", "krok");
+  const dolu = el("button", null, "−");
+  dolu.dataset.krok = co + "-";
+  dolu.disabled = hodnota <= MIN_STRANA;
+  dolu.onclick = () => { klik(); zmen({ [co]: hodnota - 1 }); };
+  const hor = el("button", null, "+");
+  hor.dataset.krok = co + "+";
+  hor.disabled = hodnota >= MAX_STRANA;
+  hor.onclick = () => { klik(); zmen({ [co]: hodnota + 1 }); };
+  k.appendChild(dolu);
+  k.appendChild(el("b", null, String(hodnota)));
+  k.appendChild(hor);
+  return k;
 }
 
 function nahled(o) {
@@ -527,27 +827,56 @@ function nahled(o) {
   return g;
 }
 
-/* Hláška se objeví, až je podlaha celá pokrytá — do té doby by jen rušila. */
+/* =====================================================================
+   Vyhodnocení
+   Dokud je kam pokládat, appka mlčí — hláška by jen rušila. Ozve se,
+   až je podlaha plná, nebo až se nikam nic nevejde.
+   ===================================================================== */
+/* Kolik typů parket dané zadání vyžaduje; null = neomezuje. */
+function zadaniPotreba(id) {
+  const z = seznamZadani.find(x => x.id === id);
+  if (!z || z.typu == null) return null;
+  return z.typu === "vse" ? U.tvary.length : z.typu;
+}
+
 function vyhodnot(pokryto, typyPouzite, min) {
-  if (pokryto < U.policek) return null;
-  const potreba = zadani.typu === "vse" ? U.tvary.length : zadani.typu;
-  if (typyPouzite !== potreba) {
-    return { hotovo: false, text:
+  if (pokryto < U.policek) {
+    if (hlasit === "nejde") return { trida: "stop", text:
+      "Tahle podlaha se z těchhle parket pokrýt <b>nedá</b>, ať bys to " +
+      "zkoušel jakkoli. Zkus přidat ještě jeden tvar parkety." };
+    if (hlasit !== "slepa") return null;
+    if (!min) return { trida: "stop", text:
+      "Nikam už se nic nevejde — a tahle podlaha se z těchhle parket " +
+      "pokrýt <b>nedá</b>, ať bys to zkoušel jakkoli. Zkus přidat ještě " +
+      "jeden tvar parkety." };
+    return { trida: "skoro", text:
+      "Nikam už se nic nevejde. Pokrýt to ale jde — zkus to jinak." };
+  }
+  const potreba = zadaniPotreba(zadani.id);
+  if (potreba != null && typyPouzite !== potreba) {
+    return { trida: "skoro", text:
       `Podlaha je pokrytá, ale zadání chce <b>${slovem(potreba)}</b> ` +
       `${potreba === 1 ? "typ" : potreba < 5 ? "typy" : "typů"} parket — ` +
       `a ty jsi použil ${slovem(typyPouzite)}.` };
   }
-  if (!min) return { hotovo: true, text: "Podlaha je pokrytá!" };
+  if (!min) return { text: "Podlaha je pokrytá!" };
   if (polozene.length === min.pocet) {
-    return { hotovo: true, text:
+    return { text:
       `Hotovo za <b>${polozene.length}</b> parket — a míň jich použít nejde. ` +
       `Přesně tak to má být.` };
   }
-  return { hotovo: false, text:
+  return { trida: "skoro", text:
     `Podlaha je pokrytá za ${polozene.length} parket. Jde to ale i za ` +
     `<b>${min.pocet}</b> — zkus to znovu.` };
 }
 const slovem = n => ["nula", "jeden", "dva", "tři", "čtyři", "pět"][n] || String(n);
+
+/* Vejde se ještě nějaká parketa? Levné: stačí projít předpočítaná
+   položení a podívat se, jestli některé nekoliduje s obsazeným. */
+function jdeJeste() {
+  const kde = obsazenost();
+  return U.polozeni.some(p => p.bunky.every(([c, r]) => !kde.has(r + ":" + c)));
+}
 
 /* =====================================================================
    Ovládání podlahy
@@ -590,6 +919,7 @@ function pripojOvladani(g) {
       /* sundat jen když prst skončil na téže parketě, na které začal */
       if (b && kde.get(b.r + ":" + b.c) === zacalNaParkete) {
         polozene.splice(zacalNaParkete, 1);
+        hlasit = null;
         ton(380, .07); vykresli();
       }
       zacalNaParkete = -1;
@@ -602,13 +932,14 @@ function pripojOvladani(g) {
                       r: duch.r, c: duch.c, bunky: duch.bunky });
       duch = null;
       zvukPolozit();
-      vykresli();
       const pokryto = polozene.reduce((s, p) => s + p.bunky.length, 0);
+      hlasit = pokryto < U.policek && !jdeJeste() ? "slepa" : null;
+      vykresli();
       if (pokryto === U.policek) {
         const h = vyhodnot(pokryto, new Set(polozene.map(p => p.typ)).size,
                            minima[zadani.id]);
-        if (h && h.hotovo) zvukHotovo();
-      }
+        if (h && !h.trida) zvukHotovo();
+      } else if (hlasit) zvukSlepa();
     } else {
       if (duch) { zvukNe(); g.classList.add("trese");
                   setTimeout(() => g.classList.remove("trese"), 420); }
@@ -683,7 +1014,7 @@ window.addEventListener("keydown", e => {
   }
 });
 obnovZvuk();
-zacni(UROVNE[0]);
+zacni();
 </script>
 
 <!-- Písma jsou vložená přímo do souboru, aby appka fungovala i bez internetu. -->
